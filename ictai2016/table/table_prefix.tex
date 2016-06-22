@@ -1,0 +1,35 @@
+%\documentclass{article} 
+%\usepackage{graphicx}  
+%\usepackage{multirow}
+%\usepackage[table]{xcolor}
+%\usepackage{fixltx2e}
+%\usepackage{array}
+%
+%\begin{document}
+\begin{table}
+\centering
+
+\begin{tabular}{|c|c|c|c|c|c|}
+\hline
+	Batch No& Transaction No & \multicolumn{4}{c|}{Items in Transaction} \\ \hline \hline
+	\multirow{3}{*}{Batch 1}	&	T\textsubscript{1} & a(0.9) & c(0.54) & d(0.45) & e(0.18)		\\
+								&	T\textsubscript{2} & a(0.9) & b(0.36) & e(0.09) & --			\\
+								&	T\textsubscript{3} & a(0.2) & c(0.18) & d(0.63) & --			\\\hline
+	\multirow{3}{*}{Batch 2}	&	T\textsubscript{4} & b(0.3) & c(0.27) & --  	& --			\\
+								&	T\textsubscript{5} & a(0.1) & b(0.03) & c(0.27) & --  			\\
+								&	T\textsubscript{6} & a(0.9) & e(0.27) & --	    & --  			\\\hline
+	\multirow{3}{*}{Batch 3}	&	T\textsubscript{7} & a(0.1) & d(0.06) & e(0.12) & --			\\
+								&	T\textsubscript{8} & a(0.1) & c(0.02) & f(0.12) & --   			\\
+								&	T\textsubscript{9} & c(0.2) & d(0.09) & f(0.54) & --   			\\\hline
+								
+	\multirow{3}{*}{Batch 4}	&	T\textsubscript{10} &  --  &  --  &  --  & --    				\\
+								&	T\textsubscript{11} &  --  &  --  &  --  & --    				\\
+								&	T\textsubscript{12} &  --  &  --  &  --  & --    				\\\hline
+	\end{tabular}
+\caption{Window and Batch of Table \ref{table:uncertain_stream_transaction}}
+\label{table:prefix_assigned}
+\end{table}
+
+
+%
+%\end{document}

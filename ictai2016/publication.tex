@@ -1,0 +1,876 @@
+
+%% bare_jrnl.tex
+%% V1.4b
+%% 2015/08/26
+%% by Michael Shell
+%% see http://www.michaelshell.org/
+%% for current contact information.
+%%
+%% This is a skeleton file demonstrating the use of IEEEtran.cls
+%% (requires IEEEtran.cls version 1.8b or later) with an IEEE
+%% journal paper.
+%%
+%% Support sites:
+%% http://www.michaelshell.org/tex/ieeetran/
+%% http://www.ctan.org/pkg/ieeetran
+%% and
+%% http://www.ieee.org/
+
+%%*************************************************************************
+%% Legal Notice:
+%% This code is offered as-is without any warranty either expressed or
+%% implied; without even the implied warranty of MERCHANTABILITY or
+%% FITNESS FOR A PARTICULAR PURPOSE! 
+%% User assumes all risk.
+%% In no event shall the IEEE or any contributor to this code be liable for
+%% any damages or losses, including, but not limited to, incidental,
+%% consequential, or any other damages, resulting from the use or misuse
+%% of any information contained here.
+%%
+%% All comments are the opinions of their respective authors and are not
+%% necessarily endorsed by the IEEE.
+%%
+%% This work is distributed under the LaTeX Project Public License (LPPL)
+%% ( http://www.latex-project.org/ ) version 1.3, and may be freely used,
+%% distributed and modified. A copy of the LPPL, version 1.3, is included
+%% in the base LaTeX documentation of all distributions of LaTeX released
+%% 2003/12/01 or later.
+%% Retain all contribution notices and credits.
+%% ** Modified files should be clearly indicated as such, including  **
+%% ** renaming them and changing author support contact information. **
+%%*************************************************************************
+
+
+% *** Authors should verify (and, if needed, correct) their LaTeX system  ***
+% *** with the testflow diagnostic prior to trusting their LaTeX platform ***
+% *** with production work. The IEEE's font choices and paper sizes can   ***
+% *** trigger bugs that do not appear when using other class files.       ***                          ***
+% The testflow support page is at:
+% http://www.michaelshell.org/tex/testflow/
+
+
+
+\documentclass[journal]{IEEEtran}
+%
+% If IEEEtran.cls has not been installed into the LaTeX system files,
+% manually specify the path to it like:
+% \documentclass[journal]{../sty/IEEEtran}
+
+
+
+
+
+% Some very useful LaTeX packages include:
+% (uncomment the ones you want to load)
+
+
+% *** MISC UTILITY PACKAGES ***
+%
+%\usepackage{ifpdf}
+% Heiko Oberdiek's ifpdf.sty is very useful if you need conditional
+% compilation based on whether the output is pdf or dvi.
+% usage:
+% \ifpdf
+%   % pdf code
+% \else
+%   % dvi code
+% \fi
+% The latest version of ifpdf.sty can be obtained from:
+% http://www.ctan.org/pkg/ifpdf
+% Also, note that IEEEtran.cls V1.7 and later provides a builtin
+% \ifCLASSINFOpdf conditional that works the same way.
+% When switching from latex to pdflatex and vice-versa, the compiler may
+% have to be run twice to clear warning/error messages.
+
+
+
+
+
+
+% *** CITATION PACKAGES ***
+%
+%\usepackage{cite}
+% cite.sty was written by Donald Arseneau
+% V1.6 and later of IEEEtran pre-defines the format of the cite.sty package
+% \cite{} output to follow that of the IEEE. Loading the cite package will
+% result in citation numbers being automatically sorted and properly
+% "compressed/ranged". e.g., [1], [9], [2], [7], [5], [6] without using
+% cite.sty will become [1], [2], [5]--[7], [9] using cite.sty. cite.sty's
+% \cite will automatically add leading space, if needed. Use cite.sty's
+% noadjust option (cite.sty V3.8 and later) if you want to turn this off
+% such as if a citation ever needs to be enclosed in parenthesis.
+% cite.sty is already installed on most LaTeX systems. Be sure and use
+% version 5.0 (2009-03-20) and later if using hyperref.sty.
+% The latest version can be obtained at:
+% http://www.ctan.org/pkg/cite
+% The documentation is contained in the cite.sty file itself.
+
+
+
+
+
+
+% *** GRAPHICS RELATED PACKAGES ***
+%
+\ifCLASSINFOpdf
+  % \usepackage[pdftex]{graphicx}
+  % declare the path(s) where your graphic files are
+  % \graphicspath{{../pdf/}{../jpeg/}}
+  % and their extensions so you won't have to specify these with
+  % every instance of \includegraphics
+  % \DeclareGraphicsExtensions{.pdf,.jpeg,.png}
+\else
+  % or other class option (dvipsone, dvipdf, if not using dvips). graphicx
+  % will default to the driver specified in the system graphics.cfg if no
+  % driver is specified.
+  % \usepackage[dvips]{graphicx}
+  % declare the path(s) where your graphic files are
+  % \graphicspath{{../eps/}}
+  % and their extensions so you won't have to specify these with
+  % every instance of \includegraphics
+  % \DeclareGraphicsExtensions{.eps}
+\fi
+% graphicx was written by David Carlisle and Sebastian Rahtz. It is
+% required if you want graphics, photos, etc. graphicx.sty is already
+% installed on most LaTeX systems. The latest version and documentation
+% can be obtained at: 
+% http://www.ctan.org/pkg/graphicx
+% Another good source of documentation is "Using Imported Graphics in
+% LaTeX2e" by Keith Reckdahl which can be found at:
+% http://www.ctan.org/pkg/epslatex
+%
+% latex, and pdflatex in dvi mode, support graphics in encapsulated
+% postscript (.eps) format. pdflatex in pdf mode supports graphics
+% in .pdf, .jpeg, .png and .mps (metapost) formats. Users should ensure
+% that all non-photo figures use a vector format (.eps, .pdf, .mps) and
+% not a bitmapped formats (.jpeg, .png). The IEEE frowns on bitmapped formats
+% which can result in "jaggedy"/blurry rendering of lines and letters as
+% well as large increases in file sizes.
+%
+% You can find documentation about the pdfTeX application at:
+% http://www.tug.org/applications/pdftex
+
+
+
+
+
+% *** MATH PACKAGES ***
+%
+%\usepackage{amsmath}
+% A popular package from the American Mathematical Society that provides
+% many useful and powerful commands for dealing with mathematics.
+%
+% Note that the amsmath package sets \interdisplaylinepenalty to 10000
+% thus preventing page breaks from occurring within multiline equations. Use:
+%\interdisplaylinepenalty=2500
+% after loading amsmath to restore such page breaks as IEEEtran.cls normally
+% does. amsmath.sty is already installed on most LaTeX systems. The latest
+% version and documentation can be obtained at:
+% http://www.ctan.org/pkg/amsmath
+
+
+
+
+
+% *** SPECIALIZED LIST PACKAGES ***
+%
+%\usepackage{algorithmic}
+% algorithmic.sty was written by Peter Williams and Rogerio Brito.
+% This package provides an algorithmic environment fo describing algorithms.
+% You can use the algorithmic environment in-text or within a figure
+% environment to provide for a floating algorithm. Do NOT use the algorithm
+% floating environment provided by algorithm.sty (by the same authors) or
+% algorithm2e.sty (by Christophe Fiorio) as the IEEE does not use dedicated
+% algorithm float types and packages that provide these will not provide
+% correct IEEE style captions. The latest version and documentation of
+% algorithmic.sty can be obtained at:
+% http://www.ctan.org/pkg/algorithms
+% Also of interest may be the (relatively newer and more customizable)
+% algorithmicx.sty package by Szasz Janos:
+% http://www.ctan.org/pkg/algorithmicx
+
+
+
+
+% *** ALIGNMENT PACKAGES ***
+%
+%\usepackage{array}
+% Frank Mittelbach's and David Carlisle's array.sty patches and improves
+% the standard LaTeX2e array and tabular environments to provide better
+% appearance and additional user controls. As the default LaTeX2e table
+% generation code is lacking to the point of almost being broken with
+% respect to the quality of the end results, all users are strongly
+% advised to use an enhanced (at the very least that provided by array.sty)
+% set of table tools. array.sty is already installed on most systems. The
+% latest version and documentation can be obtained at:
+% http://www.ctan.org/pkg/array
+
+
+% IEEEtran contains the IEEEeqnarray family of commands that can be used to
+% generate multiline equations as well as matrices, tables, etc., of high
+% quality.
+
+
+
+
+% *** SUBFIGURE PACKAGES ***
+%\ifCLASSOPTIONcompsoc
+%  \usepackage[caption=false,font=normalsize,labelfont=sf,textfont=sf]{subfig}
+%\else
+%  \usepackage[caption=false,font=footnotesize]{subfig}
+%\fi
+% subfig.sty, written by Steven Douglas Cochran, is the modern replacement
+% for subfigure.sty, the latter of which is no longer maintained and is
+% incompatible with some LaTeX packages including fixltx2e. However,
+% subfig.sty requires and automatically loads Axel Sommerfeldt's caption.sty
+% which will override IEEEtran.cls' handling of captions and this will result
+% in non-IEEE style figure/table captions. To prevent this problem, be sure
+% and invoke subfig.sty's "caption=false" package option (available since
+% subfig.sty version 1.3, 2005/06/28) as this is will preserve IEEEtran.cls
+% handling of captions.
+% Note that the Computer Society format requires a larger sans serif font
+% than the serif footnote size font used in traditional IEEE formatting
+% and thus the need to invoke different subfig.sty package options depending
+% on whether compsoc mode has been enabled.
+%
+% The latest version and documentation of subfig.sty can be obtained at:
+% http://www.ctan.org/pkg/subfig
+
+
+
+
+% *** FLOAT PACKAGES ***
+%
+%\usepackage{fixltx2e}
+% fixltx2e, the successor to the earlier fix2col.sty, was written by
+% Frank Mittelbach and David Carlisle. This package corrects a few problems
+% in the LaTeX2e kernel, the most notable of which is that in current
+% LaTeX2e releases, the ordering of single and double column floats is not
+% guaranteed to be preserved. Thus, an unpatched LaTeX2e can allow a
+% single column figure to be placed prior to an earlier double column
+% figure.
+% Be aware that LaTeX2e kernels dated 2015 and later have fixltx2e.sty's
+% corrections already built into the system in which case a warning will
+% be issued if an attempt is made to load fixltx2e.sty as it is no longer
+% needed.
+% The latest version and documentation can be found at:
+% http://www.ctan.org/pkg/fixltx2e
+
+
+%\usepackage{stfloats}
+% stfloats.sty was written by Sigitas Tolusis. This package gives LaTeX2e
+% the ability to do double column floats at the bottom of the page as well
+% as the top. (e.g., "\begin{figure*}[!b]" is not normally possible in
+% LaTeX2e). It also provides a command:
+%\fnbelowfloat
+% to enable the placement of footnotes below bottom floats (the standard
+% LaTeX2e kernel puts them above bottom floats). This is an invasive package
+% which rewrites many portions of the LaTeX2e float routines. It may not work
+% with other packages that modify the LaTeX2e float routines. The latest
+% version and documentation can be obtained at:
+% http://www.ctan.org/pkg/stfloats
+% Do not use the stfloats baselinefloat ability as the IEEE does not allow
+% \baselineskip to stretch. Authors submitting work to the IEEE should note
+% that the IEEE rarely uses double column equations and that authors should try
+% to avoid such use. Do not be tempted to use the cuted.sty or midfloat.sty
+% packages (also by Sigitas Tolusis) as the IEEE does not format its papers in
+% such ways.
+% Do not attempt to use stfloats with fixltx2e as they are incompatible.
+% Instead, use Morten Hogholm'a dblfloatfix which combines the features
+% of both fixltx2e and stfloats:
+%
+% \usepackage{dblfloatfix}
+% The latest version can be found at:
+% http://www.ctan.org/pkg/dblfloatfix
+
+
+
+
+%\ifCLASSOPTIONcaptionsoff
+%  \usepackage[nomarkers]{endfloat}
+% \let\MYoriglatexcaption\caption
+% \renewcommand{\caption}[2][\relax]{\MYoriglatexcaption[#2]{#2}}
+%\fi
+% endfloat.sty was written by James Darrell McCauley, Jeff Goldberg and 
+% Axel Sommerfeldt. This package may be useful when used in conjunction with 
+% IEEEtran.cls'  captionsoff option. Some IEEE journals/societies require that
+% submissions have lists of figures/tables at the end of the paper and that
+% figures/tables without any captions are placed on a page by themselves at
+% the end of the document. If needed, the draftcls IEEEtran class option or
+% \CLASSINPUTbaselinestretch interface can be used to increase the line
+% spacing as well. Be sure and use the nomarkers option of endfloat to
+% prevent endfloat from "marking" where the figures would have been placed
+% in the text. The two hack lines of code above are a slight modification of
+% that suggested by in the endfloat docs (section 8.4.1) to ensure that
+% the full captions always appear in the list of figures/tables - even if
+% the user used the short optional argument of \caption[]{}.
+% IEEE papers do not typically make use of \caption[]'s optional argument,
+% so this should not be an issue. A similar trick can be used to disable
+% captions of packages such as subfig.sty that lack options to turn off
+% the subcaptions:
+% For subfig.sty:
+% \let\MYorigsubfloat\subfloat
+% \renewcommand{\subfloat}[2][\relax]{\MYorigsubfloat[]{#2}}
+% However, the above trick will not work if both optional arguments of
+% the \subfloat command are used. Furthermore, there needs to be a
+% description of each subfigure *somewhere* and endfloat does not add
+% subfigure captions to its list of figures. Thus, the best approach is to
+% avoid the use of subfigure captions (many IEEE journals avoid them anyway)
+% and instead reference/explain all the subfigures within the main caption.
+% The latest version of endfloat.sty and its documentation can obtained at:
+% http://www.ctan.org/pkg/endfloat
+%
+% The IEEEtran \ifCLASSOPTIONcaptionsoff conditional can also be used
+% later in the document, say, to conditionally put the References on a 
+% page by themselves.
+
+
+
+
+% *** PDF, URL AND HYPERLINK PACKAGES ***
+%
+%\usepackage{url}
+% url.sty was written by Donald Arseneau. It provides better support for
+% handling and breaking URLs. url.sty is already installed on most LaTeX
+% systems. The latest version and documentation can be obtained at:
+% http://www.ctan.org/pkg/url
+% Basically, \url{my_url_here}.
+
+
+
+
+% *** Do not adjust lengths that control margins, column widths, etc. ***
+% *** Do not use packages that alter fonts (such as pslatex).         ***
+% There should be no need to do such things with IEEEtran.cls V1.6 and later.
+% (Unless specifically asked to do so by the journal or conference you plan
+% to submit to, of course. )
+
+
+% correct bad hyphenation here
+\hyphenation{op-tical net-works semi-conduc-tor}
+
+%\graphicspath{{Figures/}}  % Location of the graphics files (set up for graphics to be in PDF format)
+
+% Include any extra LaTeX packages required
+\usepackage{graphicx}
+\usepackage[square, numbers, comma, sort&compress]{natbib}  % Use the "Natbib" style for the references in the Bibliography
+\usepackage{verbatim}  % Needed for the "comment" environment to make LaTeX comments
+\usepackage{vector}  % Allows "\bvec{}" and "\buvec{}" for "blackboard" style bold vectors in maths
+\usepackage{amsthm}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{multirow}
+\usepackage{fixltx2e}
+\usepackage[english]{babel}
+\usepackage{amsmath}
+\usepackage{todonotes}
+\usepackage[]{algorithm2e}
+\usepackage{pgfplots}
+\usepackage{caption}
+\begin{document}
+%
+% paper title
+% Titles are generally capitalized except for words such as a, an, and, as,
+% at, but, by, for, in, nor, of, on, or, the, to and up, which are usually
+% not capitalized unless they are the first or last word of the title.
+% Linebreaks \\ can be used within to get better formatting as desired.
+% Do not put math or special symbols in the title.
+\title{An Efficient Approach for Mining Frequent Pattern over Uncertain Data Stream}
+%
+%
+% author names and IEEE memberships
+% note positions of commas and nonbreaking spaces ( ~ ) LaTeX will not break
+% a structure at a ~ so this keeps an author's name from being broken across
+% two lines.
+% use \thanks{} to gain access to the first footnote area
+% a separate \thanks must be used for each paragraph as LaTeX2e's \thanks
+% was not built to handle multiple paragraphs
+%
+
+\author{Michael~Shell,~\IEEEmembership{Member,~IEEE,}
+        John~Doe,~\IEEEmembership{Fellow,~OSA,}
+        and~Jane~Doe,~\IEEEmembership{Life~Fellow,~IEEE}% <-this % stops a space
+}
+
+% note the % following the last \IEEEmembership and also \thanks - 
+% these prevent an unwanted space from occurring between the last author name
+% and the end of the author line. i.e., if you had this:
+% 
+% \author{....lastname \thanks{...} \thanks{...} }
+%                     ^------------^------------^----Do not want these spaces!
+%
+% a space would be appended to the last name and could cause every name on that
+% line to be shifted left slightly. This is one of those "LaTeX things". For
+% instance, "\textbf{A} \textbf{B}" will typeset as "A B" not "AB". To get
+% "AB" then you have to do: "\textbf{A}\textbf{B}"
+% \thanks is no different in this regard, so shield the last } of each \thanks
+% that ends a line with a % and do not let a space in before the next \thanks.
+% Spaces after \IEEEmembership other than the last one are OK (and needed) as
+% you are supposed to have spaces between the names. For what it is worth,
+% this is a minor point as most people would not even notice if the said evil
+% space somehow managed to creep in.
+
+
+
+% The paper headers
+\markboth{Journal of \LaTeX\ Class Files,~Vol.~14, No.~8, August~2015}%
+{Shell \MakeLowercase{\textit{et al.}}: Bare Demo of IEEEtran.cls for IEEE Journals}
+% The only time the second header will appear is for the odd numbered pages
+% after the title page when using the twoside option.
+% 
+% *** Note that you probably will NOT want to include the author's ***
+% *** name in the headers of peer review papers.                   ***
+% You can use \ifCLASSOPTIONpeerreview for conditional compilation here if
+% you desire.
+
+
+
+
+% If you want to put a publisher's ID mark on the page you can do it like
+% this:
+%\IEEEpubid{0000--0000/00\$00.00~\copyright~2015 IEEE}
+% Remember, if you use this you must call \IEEEpubidadjcol in the second
+% column for its text to clear the IEEEpubid mark.
+
+
+
+% use for special paper notices
+%\IEEEspecialpapernotice{(Invited Paper)}
+
+
+
+
+% make the title area
+\maketitle
+
+% As a general rule, do not put math, special symbols or citations
+% in the abstract or keywords.
+\begin{abstract}
+In modern times, knowledge discovery in big data is one of the most recent, interesting and popular topic of research area. In this topic, frequent patterns finding in the large database is one of the important challenges. With the rapid growth of modern technology like internet, smart devices (e.g. smart phones, smart watch, smart car etc.) huge amount of data is flowing all over the world. Moreover, the incoming stream of data is not always accurate and precise. Properties of data stream flow changing each and every time with the change of interest of people that is making data dynamic. These uncertain stream data (e.g. GPS data, satellite monitoring, biometric data etc.) are the resources to many emerging applications in medical science, disaster management, national security etc. These situations increase the difficulties of extracting valuable and interesting knowledge from big data. Many approaches have been developed to find frequent patterns from uncertain data. Some have been adopted to find frequent patterns from the stream of uncertain data. Due to the uncertainty and dynamic properties of data, it becomes a great challenge to find the appropriate and efficient approach to ensure the efficient usage of available resources (CPU/memory). Some approach have been developed with exact calculation and some others with the probabilistic approach. But all of them suffer from either optimization (minimum resource usage) or correctness (false data in the result set). Moreover, most of them cannot handle the stream of data that is dynamic databases. In this thesis, we have proposed an efficient and optimized approach for handling uncertain data stream. We have developed a probabilistic, sliding window based approach to create complete new \emph{US-tree} data structure that is memory efficient and optimized. This \emph{US-tree} will keep most recent meta-information \emph{U\textsuperscript{cap}} value for further mining. A comprehensive performance analysis shows that our approach is scalable, correct and faster.
+\end{abstract}
+
+% Note that keywords are not normally used for peerreview papers.
+\begin{IEEEkeywords}
+Data Mining, Frequent Pattern, Uncertain Data, Stream Data, Uncertain Stream Data,
+\end{IEEEkeywords}
+
+
+
+
+
+
+% For peer review papers, you can put extra information on the cover
+% page as needed:
+% \ifCLASSOPTIONpeerreview
+% \begin{center} \bfseries EDICS Category: 3-BBND \end{center}
+% \fi
+%
+% For peerreview papers, this IEEEtran command inserts a page break and
+% creates the second title. It will be ignored for other modes.
+\IEEEpeerreviewmaketitle
+
+
+
+% The very first letter is a 2 line initial drop letter followed
+% by the rest of the first word in caps.
+% 
+% form to use if the first word consists of a single letter:
+% \IEEEPARstart{A}{demo} file is ....
+% 
+% form to use if you need the single drop letter followed by
+% normal text (unknown if ever used by the IEEE):
+% \IEEEPARstart{A}{}demo file is ....
+% 
+% Some journals put the first two words in caps:
+% \IEEEPARstart{T}{his demo} file is ....
+% 
+% Here we have the typical use of a "T" for an initial drop letter
+% and "HIS" in caps to complete the first word.
+%\IEEEPARstart{T}{his} demo file is intended to serve as a ``starter file''
+%for IEEE journal papers produced under \LaTeX\ using
+%IEEEtran.cls version 1.8b and later.
+%% You must have at least 2 lines in the paragraph with the drop letter
+%% (should never be an issue)
+%I wish you the best of success.
+
+\section{Introduction}
+
+Knowledge Discovery in Databases (KDD) is one of the most recent and interesting fields of research. Knowledge discovery in databases (KDD) has been created to identify efficient, helpful and valuable information from extreme large databases. The main goal of this field is to find the frequent, interesting and functional information from extremely large databases and use extract valuable information in different applications and research work. Discovered Knowledge can then be used to provide automated analysis and solutions to business. It has attracted a significant amount of research. In this KDD process, the result of data mining process is to find interesting, significant and useful patterns from massive data. In recent years, with increasing of modern technologies and huge use of internet there a lot of data is being produced. Extraction of important and significant patterns from this extreme large data repository and data sources is not that much easy. Moreover. relating these interesting patterns in real-life scenario is also very tough. The mining of useful and important information refers to the acquisition of previously unknown knowledge (e.g. frequent item-set) from extremely large data collections. Data mining is defined as a process of discovering important, potentially useful and valuable patterns from extremely large volumes of data. In finding interesting and significant relations, support is used as an indicator to find out if the pattern is interesting or not. The term Data Mining or Knowledge Discovery in Databases have been adopted for a field of research dealing with the automatic discovery of implicit information or knowledge within databases. Data mining is generally utilized by organizations (e.g., financial, retail, marketing and communication organizations) with a strong consumer focus. Found knowledge from mining result of can be used to relating association rules between objects, incidents, processes, finding the actual and correct strategy to C2C (consumer to consumer) marketing, B2B (business to business) marketing, B2C (business to consumer) marketing, and other marketing policy determination etc. In telecommunication industry, finding interesting valuable patterns for multidimensional analysis of telecommunication data, fraudulent pattern analysis, unusual patterns identification, and mobile telecommunication services the pattern mining helps a lot. In the medical science, semantic integration of heterogeneous, distributed genomic and proteomic databases, alignment, indexing, similarity search and comparative analysis, multiple nucleotide sequences, pattern mining in KDD process is very helpful. Moreover, in data warehouses, for data pre-processing and different data visualization this data mining process is very useful. In genetic algorithm analysis and finding characteristic of human, frequent pattern mining process is used. Discovery of structural patterns, analysis of genetic networks and protein pathways, association and path analysis, visualization tools in genetic data analysis, data mining is very much effectively used process.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{Related Work}
+\input{table/table_uncertain_transaction}
+Many algorithms have been developed for finding frequent item-sets from uncertain databases. Among them, some are Apriori ~\cite{apriori} like approach and others are FP-growth ~\cite{fp_growth} like approach. U-Apriori ~\cite{u_priori} was proposed to mine uncertain frequent pattern that is Apriori-like candidate generation and test-based approach. UF-growth ~\cite{uf_growth}, UFP-growth ~\cite{ufp_growth} was proposed to mine frequent patterns from uncertain data but the generated tree is not compact. CUF-growth ~\cite{cuf_growth}, CUF-growth\textsuperscript{*} ~\cite{cuf_growth}, PUF-growth ~\cite{cuf_growth} was proposed later for mining uncertain data but they produce false positives as they works with probabilistic uncertainty modeling. All of them are unable to mine stream of uncertain data. UF-stream ~\cite{suf_growth} and SUF-growth ~\cite{suf_growth} proposed to mine uncertain frequent pattern from stream. UF-stream ~\cite{suf_growth} suffers from both false positives and false negatives. The SUF-growth ~\cite{suf_growth} is an exact mining algorithm that has resolved the false positive and false negative generation but the constructed tree structure is like UF-growth ~\cite{uf_growth} that suffers much because the data structure (tree) SUF-growth ~\cite{suf_growth} use to keep information is not compact. Before elaborate discussion of SUF-growth ~\cite{suf_growth} we will provide a brief discussion on the background of uncertain stream mining approaches.
+ UF-streaming ~\cite{suf_growth} was proposed to mine frequent item from uncertain stream data. This is a sliding window approach, that capture most recent data, as most recent data is most important. It has divided the transaction stream data in several batch each batch is inserted into the tree structure that is UF-tree ~\cite{uf_growth} and mine each tree using UF-growth ~\cite{uf_growth} and put all the frequent patterns found in a UF-stream structure. For avoiding false negative they have used a value \emph{preMinSup} less than minimum support (0 < \emph{preMinSup}< minimum support). Then until the window is completed the frequent item-set is put into UF-stream tree structure. This has addressed the problems of stream uncertain data mining, but it suffers from some problems like : Un-necessary mining each batch. Let window size is 3 and batch size is 2. If one wants the mining result at window 50 then in this approach it is needed to mine each of 1 to 50 batchs for getting the result, used tree structure is UF-tree and is not compact, extra data structure for keeping frequent item-set UF-stream tree structure, false positive generation in the mining process, false negative generation in the mining process, this has high running time and memory consumption.    
+SUF-growth ~\cite{suf_growth} addressed the limitations exist in UF-streaming ~\cite{suf_growth}. SUF-growth algorithm outperforms over UF-streaming algorithm. It improves over UF-streaming by avoiding the aforementioned potential problems for mining frequent item-set from streams of uncertain data. SUF-growth is an exact algorithm. Its means SUF-growth returns only truly frequent item-set. Where UF-streaming returns both true and false frequent item-set. It uses the only \emph{minsup}. No need to use \emph{preMinsup}. There also have any problem of finding an appropriate value of \emph{preMinsup}. This algorithm does not need UF-stream structure to store the mined item-sets. Need transaction databases in memory resident for assumed performance. Instead of this its use delayed mode for mining. As a result, unnecessary computation could be reduced and unnecessary mining is avoided.
+        \begin{figure}[]
+        \centering
+            \includegraphics[width=.45\textwidth]{images/suf_simulation}
+        \caption{SUF-growth ~\cite{suf_growth} tree construction}
+        \label{figure:suf_simulation}
+        \end{figure}
+Considering the advantages of SUF-growth over others algorithm, there is the question. The is how SUF-growth ~\cite{suf_growth} algorithm find frequent item-sets from streams of uncertain data using a new tree structure called SUF-tree. Now we describe this. We ﬁrst construct an SUF-tree, and then extract relevant paths from this SUF-tree (which is a global tree) to recursively from smaller UF-trees for projected databases. Due to the dynamic nature and Property 2 of data streams, expected the support of items is continuously affected by the arrival of new batches (and the removal of the contents of older batches). Arranging items in the frequency-dependent order in the SUF-tree may lead to swapping which, in turn, can cause merging and splitting—off tree nodes when the global frequencies of items change. Hence, in the SUF-tree, items are arranged according to some canonical order (e.g. lexicographic order), which can be speciﬁed by the user prior to the construction of the SUF-tree or the mining process. Consequently, the SUF-tree can be constructed using only one scan of the streams of uncertain data, and the resulting SUF-tree captures the contents of the streams. Moreover, the SUF-tree preserves the usual tree properties. The occurrence count of a node is at least as high as the sum of occurrence counts of its children.The ordering of items is unaffected by the continuous changes in the expected support values of items.\\ \\
+    For example for table-\ref{table:uncertain_stream_transaction} transaction database let construct the SUF-tree. Figure-\ref{figure:suf_simulation} shows the construction of the SUF-tree. Here as the stuff tree is based on UF-tree construction approach the node sharing is very rare. From figure-\ref{figure:suf_simulation} it’s clearly visible that the node sharing is not that much impressive as the node should be shared if the two same item has same existential probability and in real life scenario this sharing is very rare. For this reason \emph{a(0.9)} in \emph{T\textsubscript{1}} and \emph{a(0.2)} in \emph{T\textsubscript{3}} did not share single node and the tree compactness could not be accomplished. Although the SUF-growth has resolved some limitations of UF-streaming ~\cite{suf_growth}, some limitations still exist. Tree structure it uses is UF-tree ~\cite{uf_growth} structure which suffers from compactness. So SUF-growth tree also inherits this limitation, tree construction cost will be much more (both running time and memory) as the transaction grows, mining algorithm it uses is FP-growth like the approach that generates a huge candidate sub-pattern tree that costs much in the mining time. It increased mining cost (both running time and memory).
+\section{Our Proposed Approach}
+Stream Data has a special property that it comes and flows away. For this reason, we will always lose data after data stream has flown away. To resolve this, we will propose a sliding window based approach, where we will keep the most recent information in a tree structure because the most recent data is most valuable. Later we will show how the window will slide, remove old data and insert new data in the tree. As, for uncertain data stream each same item in the different transaction has different existential probability, it becomes very difficult to merge (share) these nodes in the tree. This uncertainty property of item makes the tree huge. We have proposed a new \emph{U\textsuperscript{cap}} value for each item that helps to share a single node when constructing the tree which we named as \emph{US-tree}. We will show that our proposed tree \emph{US-tree} will be very compact and very efficient for later mining. Later, we will describe an approach for mining the \emph {US-tree} named \emph{USFP-growth} which is \emph{FP-growth} like approach. Later we will propose a method for filtering and removing false positives generated by our approach in the most probable candidate frequent patterns.
+
+
+
+\subsubsection{Preliminaries}
+\paragraph{Definition-1 Uncertain Frequent Pattern: }
+    Given DB = \emph{\{T\textsubscript{1}, T\textsubscript{2}, T\textsubscript{3} . . . T\textsubscript{N} \}} , an uncertain database with \emph{N} transactions where minimum expected support threshold is $\delta$. The problem is to mine frequent item-sets \emph{FI} $\subset$ DB, where $ExpSup(FI_i) \geq \delta $ and $FI_i \in FI$.
+    
+    \paragraph{Definition-2 Batch: }
+    A group of consecutive transactions from a transaction \emph{DB}inserted in \emph{US-tree} at a time. Let table-\ref{table:uncertain_stream_transaction} batch size = \emph{3}. \emph{T\textsubscript{1}, T\textsubscript{2}, T\textsubscript{3}} is one batch and its batch-1. Then next three \emph{T\textsubscript{4}, T\textsubscript{5}, T\textsubscript{6}} is one batch and its batch-2.
+    
+    \paragraph{Definition-3 Window: } Window is the size of consecutive batchs one \emph{US-tree} can hold. Let table-\ref{table:transaction_batch} be an example of grouped transaction and batch number tagged. So for window size \emph{2} The in a certain time batch-1 and batch-2 will create a window. Then after some times when batch-3 comes then batch-2 and batch-3 will create the next window.
+    
+    \paragraph{Definition-4 U\textsuperscript{cap} :}
+    The following equation is for \emph{U\textsuperscript{cap}}    calculation.
+    \input{example/eqn_cap}
+    For transaction \emph{DB} example in table-\ref{table:uncertain_stream_transaction} for \emph{T\textsubscript{1}}, \emph{U\textsuperscript{cap}} of \emph{a{0.9}} is $0.9$ as a is the first item. For \emph{c(0.6)} \emph{U\textsuperscript{cap}} is $0.9*0.6=0.45$, \emph{d(0.50)} \emph{U\textsuperscript{cap}} is $0.9*0.5=0.45$ and \emph{e(0.2)} \emph{U\textsuperscript{cap}} is $0.9*0.2=0.18$. \emph{U\textsuperscript{cap}} is the upper bound of existential probability. As we are taking the max of all previous items coming in a particular order all items or item sets having existential probability must be less than or equal \emph{U\textsuperscript{cap}}. that is $\forall(i,j)\{ P(I_i)*P(I_j)\leq U_{cap}(I_j)\}$ where $i < j$. So support must be less than or equal \emph{U\textsubscript{cap}}.\\
+    Calculated \emph{U\textsuperscript{cap}} should be the upper bound of two item's existential probability because we have taken the maximum value of item that has come earlier. So, by two item set support that can have maximum support value, is \emph{U\textsuperscript{cap}} value. Item set having \emph{U\textsuperscript{cap}} less than minimum support must frequent. Though this may cause some false positives but it is for sure that no false negative will insert into this. 
+  \input{table/table_uncertain_transaction_batch}
+    \paragraph{Definition-5 : False Positive: } False positive is pattern which exists in frequent pattern set but actually not frequent. Probabilistic approach for mining frequent patterns sometimes generates false positive patterns. Let, \emph{\{a, ab, b, bc, c, d, cd, de, cde\}} be frequent pattern set found from any mining algorithm. Here, \emph{\{a, ab, b, bc, c, d, cd, de\}} is actual frequent pattern set, but \emph{\{ cde\}} is not frequent, then \emph{\{ cde\}} is false positive. Exact mining algorithms do not produces false positive patterns.
+    
+  \paragraph{Definition-5 : False Negative: } False negative is pattern which does not exist in frequent pattern set but actually frequent. Probabilistic mining approaches sometimes produce false negative patterns. Let, \emph{\{a, ab, b, bc, c, d, cd, de, cde\}} be found frequent pattern set by any mining algorithm. Later it is found that, \emph{\{b\}} is actually frequent but not in frequent pattern set. So, \emph{\{ b\}} is false negative pattern. Exact mining algorithm does not generate false negative patterns.
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  \paragraph{Definition-6 : Uncertainty Calculation: } For uncertain data, it comes with a probability value that is called its existential probability. For example, in table-\ref{table:uncertain_stream_transaction}  we can see each transaction having items with item's probability. This value is its existential probability. Let for transaction-\emph{T\textsubscript{2}} there is four items \emph{a(0.9), c(0.6), d(0.5)} and \emph{e(0.2)}. Here \emph{0.9, 0.6, 0.5, 0.2} all are existential probability of corresponding \emph{a, c, d, e}. That means \emph{a's} existential probability is \emph{0.9}. Probability of existence of \emph{a} in those transactions is \emph{0.9}. This property makes mining very much difficult. This property says that in different transaction in a transaction data base same item can have different existential probability. So finding similarity between same items becomes another matter to worry about. For expected support calculation of item becomes very much tough. For expected support calculation equation-\ref{equation:exp_sup} is used.
+    \input{example/eqn_exp_sup}
+    From this equation we can see that calculation of support is not that easy and straight forward like certain data. Certain data support is calculated just counting the total existence of that items in the transaction were as for uncertain data it depends on its existential probability. It may occur that some data set exists many times in a transaction database but with a low probability, so ultimately the data must not be frequent. For example, if we want to find the support of \emph{ae} of table-\ref{table:uncertain_stream_transaction} then we need to do the following calculation. For \emph{T\textsubscript{2}} $0.9*0.2=0.18$, \emph{T\textsubscript{2}} $0.9*0.1=0.09$, \emph{T\textsubscript{3}} $0.0$, \emph{T\textsubscript{4}} $0.0$, \emph{T\textsubscript{5}} $0.0$, \emph{T\textsubscript{6}} $0.9*0.3=0.27$, \emph{T\textsubscript{7}} $0.1*0.2=0.02$, \emph{T\textsubscript{8}}=$0.0$ and \emph{T\textsubscript{9}}=$0.0$.$Sup_{ae} =Sup_{ae(T_1)}+Sup_{ae(T_2)}+Sup_{ae(T_3)}+Sup_{ae(T_4)}+Sup_{ae(T_5)}+Sup_{ae(T_6)}+Sup_{ae(T_7)}+Sup_{ae(T_8)}+Sup_{ae(T_9)}=0.18+0.09+0.0+0.0+0.0+0.27+0.0+0.02+0.0+0.0=0.54$ So if \emph{minimum support is $0.9$} than \emph{ae} is not frequent but \emph{ae} exists four times in the transaction. So it makes very much difficult to find which a pattern is important or not.
+
+
+
+
+
+
+
+
+
+  \paragraph{Theorem 1: } Let X be a $k$-itemset in transaction $T_j$ (where $k > 1$). The existential probability of any of its non-empty proper subset Y that shares the same suffix $x_r$ as X (i.e., $Y \subset X \subseteq T_j$) is always less than or equal to $U^{cap}(X_r$, $T_j)$.\\
+    \emph{\textbf{Proof:}}\\
+    Let'
+    $T_j = \{X_1$, $X_2$, $X_3$ . . . , $X_r$, . . . , $X_h$\}
+    $X = \{X_s$, . . . , xr\} be a k-itemset in $T_j$
+    $Y = \{X_t$, . . . , $X_r$\} be a $k_1$-itemset (where $k_1 < k$) and a proper subset of $X$ (i.e. $Y \subset X \subseteq T_j$).\\
+    $\prod_{(X \epsilon Y)\bigwedge (X\neq X_r)}P(X,T_j) \leq max_{1 \leq q \leq r-1}$ because $0< P(X, T_j)\leq 1$. So,\\
+     $P(Y,T_j)=P(X_r,T_j)*\prod_{(X \epsilon Y)\bigwedge (X\neq X_r)}P(X,T_j)$\\
+     $\leq P(X,T_j)*max_{1 \leq q \leq r-1}=U^{cap}(X$, $T_j)$
+
+Our proposed algorithm is divided into five steps. (1) Grouping transactions into batches and window and giving each item in a transaction a prefix value is called \emph{U\textsuperscript{cap}}. (2) Insert transaction into \emph {US-tree}. (3) Sliding the \emph {US-tree} (4) mining the \emph {US-tree} with \emph{USFP-growth} algorithm and (5) Eliminating false positive (not frequent but exists infrequent item set) . For simulating our approach we consider Table~\ref{table:uncertain_stream_transaction} as uncertain stream transaction data. For this simulation, we consider window size as 2 and batch size 3. That means 3 transactions creates a batch and 2 batches create a window. After completing window construction (inserting batch 1 and 2), the \emph {US-tree} will be full. When new batch comes we slide the window. That means we remove oldest batch batch-1 and put batch-2 as the old batch. Then insert new batch in the tree as batch-3. So for window size 2 the tree always contains at most 2 batches. Thus, the tree always holds the latest information. In next subsections, we will elaborately explain our approach of every step.
+
+
+
+
+
+
+
+
+\subsubsection{Preparation}
+
+ \input{table/table_prefix}
+    In this section we will describe the batch and window grouping and the prefix value \emph{U\textsuperscript{cap}} calculation. First we calculate batch and window calculation and grouping our transaction data. As we describe earlier for the example Table-\ref{table:uncertain_stream_transaction} easy simulation we take batch size as \emph{$3$} and window size as \emph{$2$}. So first \emph{$3$} transactions \emph{T\textsubscript{1}}, \emph{T\textsubscript{2}} and \emph{T\textsubscript{3}} are grouped and labeled as \emph{Batch-1}. Then next \emph{$3$} \emph{T\textsubscript{4}}, \emph{T\textsubscript{5}} and \emph{T\textsubscript{6}} are grouped together and labeled as \emph{Batch-2}. Next \emph{$3$} \emph{T\textsubscript{7}}, \emph{T\textsubscript{8}} and \emph{T\textsubscript{9}} are grouped together and labeled as \emph{Batch-3}. Thus the consecutive next \emph{$3$} transaction should be grouped as batch and ready to be inserted into \emph{US-tree}. As our window size is $2$, after inserting two batches into the \emph{US-tree} the window will be completed. Before inserting next batch \emph{Batch-3} we need to remove \emph{Batch-1}(oldest one) from tree and move \emph{Batch-2} to \emph{Batch-1 's} position and then insert new batch, \emph{Batch-3}. Thus the latest information is inserted and kept into the \emph{US-tree}. table-\ref{table:transaction_batch} shows the window and batch grouped for stream transaction example table-\ref{table:uncertain_stream_transaction}.
+    For this calculation we earlier proposed an equation-\ref{equation:cap}. From this equation we can create \emph{U\textsuperscript{cap}} for each item in a transaction. To calculate one transaction, for each item in a transaction, if item is the first item in a transaction than item's existential probability is its \emph{U\textsuperscript{cap}} value, otherwise item's \emph{U\textsuperscript{cap}} is max of previous items existential probability multiplied by item's  own existential probability. For example, let Table-\ref{table:transaction_batch} T1 is \emph{a(0.9), c(0.6), d(0.5), e(0.2)}. \\
+    In this transaction item \emph{a(0.9)} is the first item. So its \emph{U\textsuperscript{cap}} is 0.9.\\
+    For second item, \emph{c(0.60)} previous item is only \emph{a(0.90)}. So c's $\emph{U\textsuperscript{cap}} = 0.9*0.6 = 0.54$. \\
+    For third item, \emph{d(0.50)} there are two items before it, \emph{a(0.9)} and \emph{c(0.6)}. Among them \emph{a} has max existential probability, that is \emph{0.9}. So \emph{d's } $\emph{U\textsuperscript{cap}} = 0.9*0.5 = 0.45$.\\
+    For fourth item \emph{e(0.2)} there are three items before it, \emph{a(0.9)} ,\emph{c(0.6)} and \emph{d(0.5)}. Among them \emph{a} has max existential probability is \emph{0.9}. So \emph{e's}  $\emph{U\textsuperscript{cap}} = 0.9*0.2 = 0.45$. Thus we can calculate each item's \emph{U\textsuperscript{cap}} value for a transaction. For easier understanding we have calculated all the item's \emph{U\textsuperscript{cap}} of Table-\ref{table:transaction_batch} and put into Table-\ref{table:prefix_assigned}.
+   
+
+
+\subsubsection{US-tree Construction}
+
+As described earlier about our batch and window. A batch should be inserted into the tree in its own window slot. After inserting all batches, the window will be complete and be ready to mine. We said earlier section that our tree will be very compact. For this we have proposed an approach for sharing nodes. For sharing same tree nodes two items with same id and order should not care about own existential probability. If item is already in the tree with same id then two items should share the node. Thus the tree will be very compact. When inserting an item in the tree the \emph{U\textsuperscript{cap}} of the tree should be updated by adding the prefix value of the node. Thus each batch should be inserted into the tree.
+    \input{example/sim_tree_winone}
+    Let construct tree for Table-\ref{table:prefix_assigned}. First we insert \emph{Batch-1 (T\textsubscript{1}, T\textsubscript{2}, T\textsubscript{3})} in the window 1. First when inserting the \emph{T\textsubscript{1} - a(0.9), c(0.54), d(0.45), e(0.18)} we insert item \emph{a(0.9)} as a child of root \emph{\{\}} (Figure-\ref{figure:t1}). Update a's prefix value as $0.9$. Then we add \emph{c(0.54)} as a's child update c's prefix value as $0.54$. Aad \emph{d(0.45)} as c's child update d's prefix value as $0.45$. Add \emph{e(0.18)} as d's child update e's prefix value as $0.18$. Thus \emph{T1} is inserted into the tree (Figure-\ref{figure:t1}). For \emph{T\textsubscript{2} - a(0.9), b(0.36), e(0.09)} first we insert \emph{a(0.9)}. Here we found \emph{a} is already inserted so we just update existing node a's prefix value $0.9 + 0.9 = 1.8$ (Figure-\ref{figure:t23}). Then we insert \emph{b(0.36)}. As \emph{a} has no child \emph{b} we insert a new child b and update its prefix value $0.36$. Then insert new e(0.09) as the child of \emph{b}. For \emph{T\textsubscript{3} - a(0.2), c(0.18), d(0.63)} we follow the existing path \emph{a(1.8), c(0.54), d(0.45)} and update corresponding prefix value as $1.8 + 0.2 = 2.0$, $0.54 + 0.18 = 0.72$ and $0.45 + 0.63 = 1.08$ (Figure-\ref{figure:t23}). After inserting the This \emph{T\textsubscript{3}} window 1 is completed. Then we will go for inserting next batch \emph{Batch-2 (T\textsubscript{4}, T\textsubscript{5}, T\textsubscript{6})} in the tree. For \emph{Batch-2} we shall put prefix value in the window's newest place. And thus the latest batch becomes the most recent information. For inserting \emph{T\textsubscript{4} - b(0.3), c(0.27)} we insert new node \emph{b} as there is no child b of root node \emph{\{\}}. So we insert \emph{b} as a child of root \emph{\{\}}. Update its prefix value as $0.3$. Then insert \emph{c(0.27)} as child of \emph{b} and update prefix value $0.27$. Here as this \emph{T\textsubscript{4}} is inserting in \emph{Batch-4} we update prefix value for recent batch's information. Next we insert \emph{T\textsubscript{5} - a(0.1), b(0.03), c(0.27)}. We merge \emph{a(0.1), b(0.03)} with previous \emph{a, b } nodes and update prefix value $0.1$ and $0.03$ in the second batch's portion and insert new node \emph{b} as a child of \emph{b} and update its prefix value as $0.27$ (Figure-\ref{figure:t456}).
+    \input{example/sim_tree_slide}
+    Now our window is completed and can our \emph{USFP-growth} mine \emph {US-tree}. When new transaction batch comes like \emph{Batch-3 (T\textsubscript{7}, T\textsubscript{8}, T\textsubscript{9})} comes to be inserted into the tree then first we have to slide the window. For this when we construct the tree we maintain a header table which contains the information for the oldest data. Thus pointer points to the oldest data can be found easily and slide the whole tree. Figure-\ref{figure:slide} shows the sliding and getting the old data removed tree and ready to insert next batch \emph{Batch-3}. After inserting \emph{Batch-3} we get the tree like Figure-\ref{figure:w2}. 
+    \input{example/sim_tree_wintwo}
+    In the described \emph{US-tree} construction process we see that tree sharing is very much common and regular. That makes our tree very compact and memory needed to hold items becomes less. Moreover, the tree construction time improves surprisingly. When to mine this \emph{US-tree} we can gain a lot time when mining. As the tree size is small, conditional tree will be much more less when mining. We will gain a lot time when trying to mine the conditional trees. In the experimental result section we will provide necessary graphs for our simulations.
+\subsubsection{FPUS-growth Mining Approach}
+In this section we will discuss about our mining approach \emph{USFP-growth} That will find frequent patterns. For mining we used \emph{FP-growth} like approach. Generally, we can remove all the nodes having support less than \emph{minimum support}. From header table we get such information that which nodes is less than \emph{minimum support}. We told earlier that for \emph{U\textsuperscript{cap}} value we took the upper limit, we also can we can remove all the nodes having prefix value less than \emph{minimum support}. In this process we can eliminate most of the infrequent nodes from tree. For this purpose we used header table that was created when creating the \emph{US-tree}. Then we construct conditional tree starting from the lowest support holding node. From header table we also get the position of all nodes containing same item in the tree. 
+    Let’s mine the tree we constructed earlier. Figure-\ref{figure:min_before} is \emph{US-Tree} for mining and corresponding header table before starting mining. From the header table, we get that support of \emph{a} is $3.00$, \emph{b} is $1.00$, \emph{c} is $3.30$, \emph{d} is $1.20$, \emph{e} is $0.60$. So, \emph{e} is not frequent for one item set frequent pattern. So it is sure that no item set contains \emph{e} will be frequent. That is the basic upward closure property of frequent item set. So we remove all the nodes of \emph{e} and get the new mining tree Figure-\ref{figure:min_ready} and its header table. Here we find all one item sets that are frequent and that is \emph{\{a\}, \{b\}, \{c\} \{d\}} Now we will construct conditional tree for the found frequent one item and mine the conditional tree. But items having total \emph{U\textsuperscript{cap}} less than \emph{minimum support} is not needed to construct conditional tree because this \emph{U\textsuperscript{cap}} value has been take as the upper bound. So total \emph{U\textsuperscript{cap}} value less than \emph{minimum support} indicates that item must not be exists in the $2$ or more frequent item set. So we do not construct conditional tree for these items.
+    We construct conditional tree from items having lowest total \emph{U\textsuperscript{cap}} value greater than \emph{minimum support}. As \emph{b} having total \emph{U\textsuperscript{cap}} is $.69$ \emph{b}, is ignored for constructing conditional tree. Then the next candidate is \emph{d}. From header table pointer we find that there is only one path item \emph{d} exists in the mining tree Figure-\ref{figure:min_ready}. That is \{\emph{a, c, d}\}:$1.08$. So we create conditional tree and update all nodes mining probability with \emph{d's} \emph{U\textsuperscript{cap}} $1.08$. For this conditional tree Figure-\ref{figure:d_cond} the header tables says all the nodes in the tree are having \emph{U\textsuperscript{cap}} greater than \emph{minimum support} $.9$. So, all the items are ready to be constructed as conditional tree. As here is only one branch so we do not further construct conditional tree and take all the combinations as frequent items Figure-\ref{figure:d_cond} Table. So we find \emph{\{dc\}, \{da\}, \{dca\}} as frequent pattern. Next we create conditional tree for \emph{c}. Here c exists in the tree for three path those are \emph{\{a, c\} : $0.72$ , \{a , b, c\} : $.027$ and \{b, c\} : $0.27$}. So we create conditional tree (Figure-\ref{figure:c_cond}). Total mining value of \emph{c} is the sum of item caps in each respective path of \emph{c}. From the header we see that \emph{b} has total cap having less than \emph{minimum support} so we remove \emph{b} and create two item set \emph{\{ca\}}. Next we construct \emph{ca} conditional tree that contains only root (\emph{\{\}}). So no further tree is needed to be constructed and minned. Than we create conditional tree for \emph{a}. And find only root \emph{\{\}}. Thus we get all the frequent patterns. All the patterns are \emph{\{a\}, \{b\}, \{c\} \{d\}, \{dc\}, \{da\}, \{dca\} and \{ca\}}. As we have found all patterns from upper bound, so that it is guaranteed that there will be no false negative. But some false positive can be exists in the found frequent item set as there may be some value less than max value we assumed. So in the next section we will show an approach that eliminates the all false positives (if exists) in the data set.
+    \input{example/sim_min}
+    \input{example/sim_min_d_cond}
+\subsubsection{False positive reduction}
+    False positives are such patterns those are exist in the frequent pattern list but not actually frequent. False negatives are such patterns those does not exist in the frequent pattern list but actually frequent. As our whole process of \emph{U\textsuperscript{cap}} assignment, construction of \emph{US-tree} and \emph{USFP-growth} mining algorithm, all are process are based on taking upper value of two item set supports, our process may create some false positives but no false negatives. In this section we will discuss about finding and eliminating all the false positives from found patterns from \emph{USFP-growth} mining result. For this elimination process we just use two scans of transactions. In the first scan we eliminate the infrequent one item set. In the second scan we update \emph{frequent tree} exact support that makes easily to find infrequent items if exists in our frequent item found. The process is given below.\\
+    In the previous sections we described about tree construction and mining approach. Mining transaction table-\ref{table:transaction_batch} we found \emph{\{a\}, \{b\}, \{c\} \{d\}, \{dc\}, \{da\}, \{dca\}} and \emph{\{ca\}} as frequent patterns. From the patterns we first construct a pattern tree from the patterns. This tree is very much easier to construct. For tree construction we first create root node \emph{\{\}}. Then take each frequent item and insert into the root node as a child. for \emph{a}, \emph{b}, \emph{c}, \emph{d} we just insert as child as it does not exists in the tree. For \emph{dc} do not create new node for \emph{d} but create a new node \emph{c} as child of \emph{d} as there is no \emph{c} exists in the child of \emph{d}. Thus we construct the whole frequent pattern tree for further identification of infrequent patterns. \\
+    Next, in the first scan of inserted transactions, we remove one item infrequent all items from transactions. Figure-\ref{figure:frequent_patterns_final} table shows the transaction table after eliminating all nodes accepts one item frequent. As for one item frequent checking we did not take any upper bound limit we get exact one item frequent patterns. From our \emph{Frequent Item Tree} all the children of \emph{root \{\}} are frequent and there is no false positive. So we can get \emph{\{a\}, \{b\}, \{c\} \{d\}} one item frequent set and without these all other items are infrequent.  Then in the second scan we take each transaction and update each nodes support. In the tree we update value with the equation-\ref{equation:exp_sup}. After scanning second time our \emph{Frequent Item Tree} becomes full fill with all information to find infrequent exists in our patterns. For this we need to traverse the \emph{Frequent Item Tree}. As the tree contains all nodes with its own support we get the true infrequent. For example, for \emph{\{d, a\}} path \emph{a : 0.89} as the actual support for {da : 0.89} pattern. We find this in frequent, so we can easily eliminate. Figure-\ref{figure:frequent_patterns_final} shows the identifying all the frequent item set infrequent. So we can eliminate all the false positives.    And find the exact frequent patterns. From the tree we find the patterns \emph{\{a\}, \{b\}, \{c\} \{d\} and \{dc\}}.
+    \input{example/frequent_items}
+
+
+
+
+
+\section{Experimental Results}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{Conclusion}
+In this thesis, we have proposed new sliding window based probabilistic strategy for finding frequent patterns from uncertain dynamic data. We have proposed \emph{U\textsuperscript{cap}}, which is the upper bound of existential probability. We have proposed new \emph{US-tree} data-structure that is very compact. For mining, we have introduced \emph{USFP-growth} algorithm that will efficiently and recursively mine frequent patterns from \emph{US-tree}.
+For calculating \emph{U\textsuperscript{cap}} value, we have taken upper-bound of existential probability that makes the node sharing possible between same items. For uncertainty property of data, node sharing was very much irregular in existing approaches. In our strategy, node sharing is possible more frequently and this makes the tree more compact and efficient. Our proposed \emph{US-tree} is very compact for possible node sharing much more than existing tree structures (e.g. \emph{SUF-growth} ~\cite{suf_growth}). To handle the stream of data we have proposed to divide the whole transactions into batches and windows that is completely dependent on the system user how much recent data she/he wants to store in the tree. Instead of keeping the support we have kept new meta-information based on \emph{U\textsuperscript{cap}} value that helps further mining. We have developed new algorithm \emph{USFP-growth} mining algorithm that efficiently remove unnecessary patterns from the tree earlier, which helps to improve runtime time efficiency. Conditional candidate tree needed to be mined in our approach, will be less than other approaches. This makes the mining algorithm faster. We have also introduced an efficient strategy to remove the false positives generated by our algorithm. Our comprehensive result study shows that total time (tree construction, tree mining, and false positive reduction) is less than existing approaches (e.g. \emph{SUF-growth} ~\cite{suf_growth}). We also developed a frequent pattern tree which may later be used to mine closed patterns and maximal patterns.
+As the frequent pattern mining over the domain of uncertain stream data is a very new, there are some scopes to extend and use our proposed approach as a tool for further research.
+\textbf{Firstly,} we have introduced probabilistic model for calculating \emph{U\textsuperscript{cap}} value. This value can be studied and updated to find both upper and lower bound of existential probability.
+\textbf{Secondly,} as data-set we have worked on is the stream data, which is dynamic, can be changed dynamically with time. Once an item comes to the top of the \emph{US-tree} stays there at least it becomes oldest data although may be very much infrequent in the recent data. This case may make the tree not compact that was possible. As data stream cannot be read more than once. So no previously assumption can be done to the tree. So some re-construction after new batch inserted into the window will possibly be the one of the major optimization of the tree.
+
+% An example of a floating figure using the graphicx package.
+% Note that \label must occur AFTER (or within) \caption.
+% For figures, \caption should occur after the \includegraphics.
+% Note that IEEEtran v1.7 and later has special internal code that
+% is designed to preserve the operation of \label within \caption
+% even when the captionsoff option is in effect. However, because
+% of issues like this, it may be the safest practice to put all your
+% \label just after \caption rather than within \caption{}.
+%
+% Reminder: the "draftcls" or "draftclsnofoot", not "draft", class
+% option should be used if it is desired that the figures are to be
+% displayed while in draft mode.
+%
+%\begin{figure}[!t]
+%\centering
+%\includegraphics[width=2.5in]{myfigure}
+% where an .eps filename suffix will be assumed under latex, 
+% and a .pdf suffix will be assumed for pdflatex; or what has been declared
+% via \DeclareGraphicsExtensions.
+%\caption{Simulation results for the network.}
+%\label{fig_sim}
+%\end{figure}
+
+% Note that the IEEE typically puts floats only at the top, even when this
+% results in a large percentage of a column being occupied by floats.
+
+
+% An example of a double column floating figure using two subfigures.
+% (The subfig.sty package must be loaded for this to work.)
+% The subfigure \label commands are set within each subfloat command,
+% and the \label for the overall figure must come after \caption.
+% \hfil is used as a separator to get equal spacing.
+% Watch out that the combined width of all the subfigures on a 
+% line do not exceed the text width or a line break will occur.
+%
+%\begin{figure*}[!t]
+%\centering
+%\subfloat[Case I]{\includegraphics[width=2.5in]{box}%
+%\label{fig_first_case}}
+%\hfil
+%\subfloat[Case II]{\includegraphics[width=2.5in]{box}%
+%\label{fig_second_case}}
+%\caption{Simulation results for the network.}
+%\label{fig_sim}
+%\end{figure*}
+%
+% Note that often IEEE papers with subfigures do not employ subfigure
+% captions (using the optional argument to \subfloat[]), but instead will
+% reference/describe all of them (a), (b), etc., within the main caption.
+% Be aware that for subfig.sty to generate the (a), (b), etc., subfigure
+% labels, the optional argument to \subfloat must be present. If a
+% subcaption is not desired, just leave its contents blank,
+% e.g., \subfloat[].
+
+
+% An example of a floating table. Note that, for IEEE style tables, the
+% \caption command should come BEFORE the table and, given that table
+% captions serve much like titles, are usually capitalized except for words
+% such as a, an, and, as, at, but, by, for, in, nor, of, on, or, the, to
+% and up, which are usually not capitalized unless they are the first or
+% last word of the caption. Table text will default to \footnotesize as
+% the IEEE normally uses this smaller font for tables.
+% The \label must come after \caption as always.
+%
+%\begin{table}[!t]
+%% increase table row spacing, adjust to taste
+%\renewcommand{\arraystretch}{1.3}
+% if using array.sty, it might be a good idea to tweak the value of
+% \extrarowheight as needed to properly center the text within the cells
+%\caption{An Example of a Table}
+%\label{table_example}
+%\centering
+%% Some packages, such as MDW tools, offer better commands for making tables
+%% than the plain LaTeX2e tabular which is used here.
+%\begin{tabular}{|c||c|}
+%\hline
+%One & Two\\
+%\hline
+%Three & Four\\
+%\hline
+%\end{tabular}
+%\end{table}
+
+
+% Note that the IEEE does not put floats in the very first column
+% - or typically anywhere on the first page for that matter. Also,
+% in-text middle ("here") positioning is typically not used, but it
+% is allowed and encouraged for Computer Society conferences (but
+% not Computer Society journals). Most IEEE journals/conferences use
+% top floats exclusively. 
+% Note that, LaTeX2e, unlike IEEE journals/conferences, places
+% footnotes above bottom floats. This can be corrected via the
+% \fnbelowfloat command of the stfloats package.
+
+
+
+
+
+
+
+% if have a single appendix:
+%\appendix[Proof of the Zonklar Equations]
+% or
+%\appendix  % for no appendix heading
+% do not use \section anymore after \appendix, only \section*
+% is possibly needed
+
+% use appendices with more than one appendix
+% then use \section to start each appendix
+% you must declare a \section before using any
+% \subsection or using \label (\appendices by itself
+% starts a section numbered zero.)
+%
+
+
+%\appendices
+%\section{Proof of the First Zonklar Equation}
+%Appendix one text goes here.
+
+% you can choose not to have a title for an appendix
+% if you want by leaving the argument blank
+%\section{}
+%Appendix two text goes here.
+
+
+% use section* for acknowledgment
+\section*{Acknowledgments}
+
+
+The authors would like to thank...
+
+
+% Can use something like this to put references on a page
+% by themselves when using endfloat and the captionsoff option.
+\ifCLASSOPTIONcaptionsoff
+  \newpage
+\fi
+
+
+
+% trigger a \newpage just before the given reference
+% number - used to balance the columns on the last page
+% adjust value as needed - may need to be readjusted if
+% the document is modified later
+%\IEEEtriggeratref{8}
+% The "triggered" command can be changed if desired:
+%\IEEEtriggercmd{\enlargethispage{-5in}}
+
+% references section
+
+% can use a bibliography generated by BibTeX as a .bbl file
+% BibTeX documentation can be easily obtained at:
+% http://mirror.ctan.org/biblio/bibtex/contrib/doc/
+% The IEEEtran BibTeX style support page is at:
+% http://www.michaelshell.org/tex/ieeetran/bibtex/
+%\bibliographystyle{IEEEtran}
+% argument is your BibTeX string definitions and bibliography database(s)
+%\bibliography{IEEEabrv,../bib/paper}
+%
+% <OR> manually copy in the resultant .bbl file
+% set second argument of \begin to the number of references
+% (used to reserve space for the reference number labels box)
+%\begin{thebibliography}{1}
+
+%\bibitem{IEEEhowto:kopka}
+%H.~Kopka and P.~W. Daly, \emph{A Guide to \LaTeX}, 3rd~ed.\hskip 1em plus
+%  0.5em minus 0.4em\relax Harlow, England: Addison-Wesley, 1999.
+
+%\end{thebibliography}
+
+\bibliographystyle{plain}
+%\bibliography{mybib}
+\bibliography{Bibliography}
+
+% biography section
+% 
+% If you have an EPS/PDF photo (graphicx package needed) extra braces are
+% needed around the contents of the optional argument to biography to prevent
+% the LaTeX parser from getting confused when it sees the complicated
+% \includegraphics command within an optional argument. (You could create
+% your own custom macro containing the \includegraphics command to make things
+% simpler here.)
+%\begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{mshell}}]{Michael Shell}
+% or if you just want to reserve a space for a photo:
+
+%\begin{IEEEbiography}{Michael Shell}
+%Biography text here.
+%\end{IEEEbiography}
+
+% if you will not have a photo at all:
+%\begin{IEEEbiographynophoto}{John Doe}
+%Biography text here.
+%\end{IEEEbiographynophoto}
+
+% insert where needed to balance the two columns on the last page with
+% biographies
+%\newpage
+
+%\begin{IEEEbiographynophoto}{Jane Doe}
+%Biography text here.
+%\end{IEEEbiographynophoto}
+
+% You can push biographies down or up by placing
+% a \vfill before or after them. The appropriate
+% use of \vfill depends on what kind of text is
+% on the last page and whether or not the columns
+% are being equalized.
+
+%\vfill
+
+% Can be used to pull up biographies so that the bottom of the last one
+% is flush with the other column.
+%\enlargethispage{-5in}
+
+
+
+% that's all folks
+\end{document}
+
+
