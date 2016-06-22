@@ -1,0 +1,28 @@
+ass
+
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
+# Package Files #
+**/*.jar
+**/*.war
+**/*.ear
+**/*.log
+**/*.fls
+**/*.fdb_latexmk
+**/*.dvi
+**/*.synctex.gz
+**/*.lof
+**/*.pdf
+**/*.gz
+**/*.aux
+**/*.out
+**/*.toc
+**/*.bcf
+**/*.blg
+**/*.lot
+**/*.bbl
+**/*.xml
+.idea
+
+
