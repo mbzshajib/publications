@@ -1,0 +1,30 @@
+%\documentclass{article}
+%\usepackage{pgfplots}
+%\begin{document}
+\pgfmathdeclarefunction{gauss}{2}{%
+  \pgfmathparse{1/(#2*sqrt(2*pi))*exp(-((x-#1)^2)/(2*#2^2))}%
+}
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+ width=11cm,
+   height=10cm,
+  no markers, domain=0:1, samples=100,
+  axis lines*=left, xlabel=Probability, ylabel=Items,
+%  every axis y label/.style={at=(current axis.above origin),anchor=south},
+  every axis x label/.style={at=(current axis.right of origin),anchor=west},
+  height=5cm, width=12cm,
+  xtick={.5}, ytick=\empty,
+  enlargelimits=false, clip=false, axis on top,
+  grid = major
+  ]
+
+  \addplot [thick,cyan!50!blue] {gauss(.5,.159154943)};
+\end{axis}
+
+\end{tikzpicture}
+\caption{Normal Distribution}
+\label{result:normal_distribution}
+\end{figure}
+%\end{document}

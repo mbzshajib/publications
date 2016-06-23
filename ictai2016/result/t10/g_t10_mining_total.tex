@@ -1,0 +1,52 @@
+%%%mark = star, diamond, square, otimes
+%\documentclass{article}
+%\usepackage{pgfplots}
+%\usepackage[justification=centering]{caption}
+%\pgfplotsset{compat=newest}
+%\begin{document}
+\begin{tikzpicture}
+\begin{axis}[
+	title={\parbox{\linewidth}{\centering Total Tree Mining Time vs Minimum Suppport (\%) for T40I10D100K ~\cite{dataset}, Window Size = 5, Frame Size = 7000}},
+	width=12cm,
+	height=7cm,
+    xlabel={Minimum Support (\%) },
+    ylabel={Running Time (s)},
+    xmin=4.5, xmax=6.5,
+    ymin=0, ymax=8,
+    xtick={4.55,5.5,6,6.5},
+    ytick={1,2,3,4,5,6,7},
+    legend pos=north east,
+    ymajorgrids=true,
+    grid style={line width=.2pt,draw=gray!50},
+]
+ 
+\addplot[
+    solid, every mark/.append style={solid, fill=gray}, mark=square
+    ]
+    coordinates {
+			(4.5,10.856)
+			(5  ,4.216 )
+			(5.5,3.221 )
+			(6  ,3.026 )
+			(6.5,2.851 )
+
+
+};
+    \addlegendentry{SUF-growth}
+\addplot[
+    solid, every mark/.append style={solid, fill=black}, mark=*
+    ]
+    coordinates {
+			(4.5,  2.797)
+			(5  , 2.791)
+			(5.5,2.69 )
+			(6  ,2.656 )
+			(6.5,2.364 )
+
+
+};
+    \addlegendentry{USFP-growth}
+ 
+\end{axis}
+\end{tikzpicture}
+%\end{document}

@@ -1,0 +1,52 @@
+%%mark = star, diamond, square, otimes
+%\documentclass{article}
+%\usepackage{pgfplots}
+%\usepackage[justification=centering]{caption}
+%\pgfplotsset{compat=newest}
+%\begin{document} 
+\begin{tikzpicture}
+\begin{axis}[
+	title={\parbox{\linewidth}{\centering Total Tree Construction Time vs Minimum Suppport (\%) for Chess ~\cite{dataset}, Window Size = 3, Frame Size = 300}},
+	width=12cm,
+	height=7cm,
+    xlabel={Minimum Support (\%) },
+    ylabel={Running Time (ms)},
+    xmin=30, xmax=35,
+    ymin=0, ymax=1100,
+    xtick={30,31,32,33,34,34,35},
+    ytick={200,400,600,800,1000},
+    legend pos=north east,
+    ymajorgrids=true,
+    grid style={line width=.2pt,draw=gray!50},
+]
+ 
+\addplot[
+    solid, every mark/.append style={solid, fill=gray}, mark=square
+    ]
+    coordinates {
+			(30,873)
+			(31,811)
+			(32,761)
+			(33,749)
+			(34,714)
+			(35,707)
+
+	};
+    \addlegendentry{SUF-growth}
+\addplot[
+    solid, every mark/.append style={solid, fill=black}, mark=*
+    ]
+    coordinates {
+			(30,87)
+			(31,87)
+			(32,63)
+			(33,61)
+			(34,59)
+			(35,55)
+
+};
+    \addlegendentry{USFP-growth}
+ 
+\end{axis}
+\end{tikzpicture}
+%\end{document}

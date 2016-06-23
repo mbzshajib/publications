@@ -1,0 +1,16 @@
+%\documentclass{book}
+%\usepackage{pgfplots}
+%\usepackage[justification=centering]{caption}
+%\pgfplotsset{compat=newest}
+%\begin{document}
+For our experimental evaluation we used both real life database and synthetic database from database repository [\ref{bib:dataset}]. Table [\ref{table:dataset}] shows the data base type and properties.
+\input{table/table_dataset}
+\subsection{Real Life Data Set}
+For real life data sets we have used mushroom [\ref{bib:dataset}], chess [\ref{bib:dataset}] and pumsb star [\ref{bib:dataset}]. Mushroom, chess and pumsb star are dense datasets. Mushroom has 8124 transactions with 120 distinct items, chess has 3196 transactions with 75 distinct items and pumsb star has 49046 transactions with 2088 distinct items. For probability assignment to each items we used normal distribution for getting existential probability.
+\subsection{Synthetic Data Set}
+For synthetic data sets we have used T10I4D100K [\ref{bib:dataset}]. It is an IBM generated transactional data set widely used for frequent pattern mining. It is a sparse data set with 100000 transactions and 869 distinct items. For probability assignment to each items we used normal distribution for getting existential probability.
+\input{mushroom/g_dataset_mushroom}
+\input{chess/g_dataset_chess}
+\input{pumsb_star/g_dataset_pumsb_star}
+\input{t10/g_dataset_t10}
+%\end{document}

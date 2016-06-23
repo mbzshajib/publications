@@ -1,0 +1,17 @@
+\documentclass{book}
+\usepackage{pgfplots}
+\usepackage[justification=centering]{caption}
+\pgfplotsset{compat=newest}
+\begin{document}
+\subsection{Runtime Comparison}
+\input{mushroom/g_m_tree_construction_total}
+\input{mushroom/g_m_mining_total}
+\input{mushroom/g_m_total}
+\input{t10/g_t10_tree_construction_total}
+\input{t10/g_t10_mining_total}
+\input{t10/g_t10_total}
+\cleardoublepage
+\subsection{Memory Comparison}
+\input{mushroom/g_m_memory_node}
+\input{t10/g_t10_memory_node}
+\end{document}

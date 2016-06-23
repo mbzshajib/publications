@@ -1,0 +1,78 @@
+%mark = star, diamond, square, otimes
+%\documentclass{article}
+%\usepackage{pgfplots}
+%\usepackage[justification=centering]{caption}
+%\pgfplotsset{compat=newest}
+%\begin{document}
+\begin{tikzpicture}
+\begin{axis}[
+ title={Batch Size vs Total Rinning Time (Mushroom ~\cite{dataset}), minimum support 12\%},
+ width=12cm,
+   height=7cm,
+    xlabel={Batch Size},
+    ylabel={Running Time (ms)},
+    xmin=400, xmax=900,
+    ymin=0, ymax=500,
+    xtick={400,500,600,700,800,900},
+    ytick={100,200,300,400},
+    legend pos=north east,
+    ymajorgrids=true,
+    grid style={line width=.2pt,draw=gray!50},
+]
+ 
+\addplot[
+    solid,color=gray, every mark/.append style={solid, fill=gray}, mark=square
+    ]
+    coordinates {
+			(400,147)
+			(500,136)
+			(600,126)
+			(700,137)
+			(800,131)
+			(900,165)
+	};
+    \addlegendentry{window size $=$ 4}
+
+	\addplot[
+    solid,color=red, every mark/.append style={solid, fill=red}, mark=*
+    ]
+    coordinates {
+			(400,154)
+			(500,156)
+			(600,159)
+			(700,183)
+			(800,167)
+			(900,168)
+};
+    \addlegendentry{window size $=$ 5}
+	
+
+\addplot[
+    solid,color=green, every mark/.append style={solid, fill=green}, mark=*
+    ]
+    coordinates {
+			(400,171)
+			(500,164)
+			(600,180)
+			(700,196)
+			(800,202)
+			(900,226)
+};
+    \addlegendentry{window size $=$ 6}
+	
+	
+\addplot[
+    solid,color=blue, every mark/.append style={solid, fill=blue}, mark=*
+    ]
+    coordinates {
+			(400,174)
+			(500,190)
+			(600,196)
+			(700,197)
+			(800,201)
+			(900,264)
+};
+    \addlegendentry{window size = 7}
+\end{axis}
+\end{tikzpicture}
+%\end{document}
