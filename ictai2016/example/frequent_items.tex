@@ -1,11 +1,20 @@
+  \begin{figure}[]
+        \centering
+            \includegraphics[width=.45\textwidth]{images/frequent_tree_final}
+        \caption{Pattern Tree Identifying False Positives}
+        \label{figure:frequent_patterns_final}
+  \end{figure}
+
+
+
 \begin{figure}
-\begin{minipage}{0.20\textwidth}
+\begin{minipage}{0.15\textwidth}
   \centering
   
 	\begin{center}
 	\begin{tabular}{ |c| } 
  	\hline
- 		Frequent Items\\ \hline\hline
+ 		FPs\\ \hline\hline
  		a \\ \hline
  		b \\ \hline
  		c \\ \hline
@@ -21,40 +30,26 @@
   \captionof{table}{Frequent Patterns}
 \end{minipage}
 \hfill
-\begin{minipage}{0.20\textwidth}
-  \centering
-  \includegraphics[width=\textwidth]{images/frequent_tree.jpg}
-  \captionof{figure}{Frequent Pattern Tree }
-\end{minipage}
-\caption{Frequent Patterns and Pattern Tree}
-\label{figure:frequent_patterns}
-\end{figure}
-
-\begin{figure}
-\begin{minipage}{.2\textwidth}
+\begin{minipage}{0.30\textwidth}
   \centering
   
-	\begin{center}
-	\begin{tabular}{ |c|c| } 
- 	\hline
- 		No & Items \\ \hline\hline
- 		T\textsubscript{1} & \emph{a(0.9),c(0.6),d(0.5)}\\ \hline
- 		T\textsubscript{2}& \emph{a(0.9),b(0.4),e(0.1)}\\ \hline
- 		T\textsubscript{3}& \emph{a(0.2),c(0.9),d(0.7)}\\ \hline
- 		T\textsubscript{4}& \emph{b(0.3),c(0.9)}\\ \hline
- 		T\textsubscript{5}& \emph{a(0.1),b(0.3),c(0.9)} \\ \hline
- 		T\textsubscript{6} & \emph{a(0.9),e(0.3)
+  \begin{center}
+  \begin{tabular}{ |c|c| } 
+  \hline
+    No & Items \\ \hline\hline
+    T\textsubscript{1} & \emph{a(0.9),c(0.6),d(0.5)}\\ \hline
+    T\textsubscript{2}& \emph{a(0.9),b(0.4),e(0.1)}\\ \hline
+    T\textsubscript{3}& \emph{a(0.2),c(0.9),d(0.7)}\\ \hline
+    T\textsubscript{4}& \emph{b(0.3),c(0.9)}\\ \hline
+    T\textsubscript{5}& \emph{a(0.1),b(0.3),c(0.9)} \\ \hline
+    T\textsubscript{6} & \emph{a(0.9),e(0.3)
 }\\ \hline
 \end{tabular}
 \end{center}  
   \captionof{table}{Transaction Table after Removing Infrequent}
+
+
 \end{minipage}
-\hfill
-\begin{minipage}{0.25\textwidth}
-  \centering
-  \includegraphics[width=\textwidth]{images/frequent_tree_final.jpg}
-  \captionof{figure}{Frequent Item Tree Identifying False Positives}		
-\end{minipage}
-\caption{Transaction Table and Pattern Tree Identifying False Positives}
-\label{figure:frequent_patterns_final}
+\label{figure:frequent_patterns}
 \end{figure}
+
