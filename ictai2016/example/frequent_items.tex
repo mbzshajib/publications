@@ -1,28 +1,19 @@
-  \begin{figure}[]
-        \centering
-            \includegraphics[width=.45\textwidth]{images/frequent_tree_final}
-        \caption{Pattern Tree Identifying False Positives}
-        \label{figure:frequent_patterns_final}
-  \end{figure}
-
-
-
 \begin{figure}
-\begin{minipage}{0.15\textwidth}
+\begin{minipage}{0.40\textwidth}
   \centering
   
-	\begin{center}
-	\begin{tabular}{ |c| } 
- 	\hline
- 		FPs\\ \hline\hline
- 		a \\ \hline
- 		b \\ \hline
- 		c \\ \hline
- 		d \\ \hline
- 		dc \\ \hline
- 		da \\ \hline
- 		dca \\ \hline
- 		ca \\ \hline
+  \begin{center}
+  \begin{tabular}{ |c| } 
+  \hline
+    Frequent Items\\ \hline\hline
+    a \\ \hline
+    b \\ \hline
+    c \\ \hline
+    d \\ \hline
+    dc \\ \hline
+    da \\ \hline
+    dca \\ \hline
+    ca \\ \hline
 \end{tabular}
 \end{center}  
 
@@ -30,7 +21,17 @@
   \captionof{table}{Frequent Patterns}
 \end{minipage}
 \hfill
-\begin{minipage}{0.30\textwidth}
+\begin{minipage}{0.40\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{images/frequent_tree.jpg}
+  \captionof{figure}{Frequent Pattern Tree }
+\end{minipage}
+\caption{Frequent Patterns and Pattern Tree}
+\label{figure:frequent_patterns}
+\end{figure}
+
+\begin{figure}
+\begin{minipage}{.4\textwidth}
   \centering
   
   \begin{center}
@@ -47,9 +48,13 @@
 \end{tabular}
 \end{center}  
   \captionof{table}{Transaction Table after Removing Infrequent}
-
-
 \end{minipage}
-\label{figure:frequent_patterns}
+\hfill
+\begin{minipage}{0.50\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{images/frequent_tree_final.jpg}
+  \captionof{figure}{Frequent Item Tree Identifying False Positives}    
+\end{minipage}
+\caption{Transaction Table and Pattern Tree Identifying False Positives}
+\label{figure:frequent_patterns_final}
 \end{figure}
-
