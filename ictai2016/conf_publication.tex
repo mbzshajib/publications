@@ -21,14 +21,12 @@
 \usepackage{pdfpages}
 
 \begin{document}
-\title{An Efficient Approach for Mining Frequent Pattern over Uncertain Data Stream}
+\title{An Efficient Approach for Mining Frequent Patterns over Uncertain Data Stream}
 
 \author{
-    \IEEEauthorblockN{Md. Badi-Uz-Zaman Shajib\IEEEauthorrefmark{1}, Md. Samiullah\IEEEauthorrefmark{1}, Chowdhury Farhan Ahmed\IEEEauthorrefmark{2}, Carson Kai-Sang Leung\IEEEauthorrefmark{3}}
+    \IEEEauthorblockN{Md. Badi-Uz-Zaman Shajib\IEEEauthorrefmark{1}, Md. Samiullah\IEEEauthorrefmark{1}, Chowdhury Farhan Ahmed\IEEEauthorrefmark{1}, Carson Kai-Sang Leung\IEEEauthorrefmark{2}}
     \IEEEauthorblockA{\IEEEauthorrefmark{1}Department of Computer Science \& Engineering, University of Dhaka, Bangladesh
-    \\mbzshajib@gmail.com, samiullah@cse.univdhaka.edu}
-    \IEEEauthorblockA{\IEEEauthorrefmark{2}ICube Laboratory, University of Strasbourg, France
-    \\cfahmed@unistra.fr}
+    \\mbzshajib@gmail.com, samiullah@cse.univdhaka.edu, farhan@du.ac.bd}
     \IEEEauthorblockA{\IEEEauthorrefmark{3}Department of Computer Science University of Manitoba, Canada
     \\kleung@cs.manitoba.ca}
 }
@@ -37,37 +35,24 @@
 \maketitle
 
 \begin{abstract}
-Knowledge discovery in big data is one of the most recent, interesting and popular topic in state-of-the-art research where frequent patterns finding is one of the important challenges. With the rapid growth of modern technology huge amount of data is flowing all over the world. Moreover, the incoming stream of data is not always accurate and precise. Properties of data stream flow changing each and every time with the change of interest of people that is making data dynamic.  These uncertain stream data (e.g. GPS data, satellite monitoring, biometric data etc.) are the resources to many emerging applications in various real life applications like medical sciences, disaster management and national security. Many approaches have been developed to find frequent patterns from uncertain data. Some works emphasized on finding frequent patterns from the stream of uncertain data. Due to the uncertainty and dynamic properties of data, it becomes a great challenge to find the appropriate and efficient approach to ensure the efficient usage of available resources. In the adopted approaches there is a tradeoff between optimization (probabilistic approach and allowing false data in final result) and correctness (exact calculation and minimum resource usage). Moreover, most of them cannot handle the stream of data, that is, dynamic databases. In this paper, we have proposed a probabilistic sliding window based efficient and optimized approach for handling uncertain data stream. We have proposed a new memory efficient and optimized data structure, i.e., US-tree (Uncertain Stream-tree) that stores most recent meta-information for mining. A comprehensive performance analysis shows that our approach is scalable, correct and efficient in comparison with the recent related approaches.
+Knowledge discovery in big data is one of most interesting topic in state-of-the-art research where frequent patterns finding is a major task. With the rapid growth of modern technology, huge amount of data is flowing all over the world. The incoming stream of data is not always accurate and precise. Properties of data stream changes every time with the change of interest of people that is making data dynamic. Uncertain stream data are the resources to many emerging applications in various real life applications and many approaches have been developed to find frequent patterns from them. Due to the uncertainty and dynamic properties of data, it becomes a great challenge to find the appropriate and efficient approach to ensure the efficient usage of available resources. In the existing approaches, there is a trade-off between optimization (probabilistic approach and allowing false data in final result) and correctness (exact calculation and minimum resource usage). Moreover, most of them cannot handle the stream of data, that is, dynamic databases. In this paper, we have proposed a probabilistic sliding window based efficient and optimized approach for handling uncertain data stream and a new memory efficient data structure, i.e., US-tree (Uncertain Stream-tree) that stores most recent meta-information for mining. A comprehensive performance analysis shows that our approach is scalable, correct and efficient in comparison with the recent related approaches.
 \end{abstract}
 
-% no keywords
+\begin{IEEEkeywords}
+Data Mining, Frequent Pattern Mining, Uncertain pattern, Data Stream, Sliding Window.
+\end{IEEEkeywords}
 
-
-
-
-% For peer review papers, you can put extra information on the cover
-% page as needed:
-% \ifCLASSOPTIONpeerreview
-% \begin{center} \bfseries EDICS Category: 3-BBND \end{center}
-% \fi
-%
-% For peerreview papers, this IEEEtran command inserts a page break and
-% creates the second title. It will be ignored for other modes.
 \IEEEpeerreviewmaketitle
-
 
 \section{Introduction}
 
-Knowledge Discovery in Databases (KDD) is one of the most recent and interesting fields of research. Knowledge discovery in databases (KDD) has been created to identify efficient, helpful and valuable information from extreme large databases. The main goal of this field is to find the frequent, interesting and functional information from extremely large databases and use extract valuable information in different applications and research work. Discovered Knowledge can then be used to provide automated analysis and solutions to business. It has attracted a significant amount of research.
+Knowledge Discovery in Databases (KDD) is one of the most recent and interesting fields of research. It has been created to identify efficient, helpful and valuable information from extreme large databases. The main goal of this field is to find the frequent, interesting and functional information from extremely large databases and use extracted valuable information in different applications and research work. Discovered Knowledge can then be used to provide automated analyses and solutions to business. In KDD, the data mining process is to find interesting, significant and useful patterns from massive data. In recent years, with the increase of modern technologies and huge use of internet, a lot of data is being produced. To mine interesting patterns from static database ~\cite{DBLP:conf/vldb/AgrawalS94}, ~\cite{DBLP:journals/datamine/HanPYM04} have been proposed.
 
-In this KDD process, the result of data mining process is to find interesting, significant and useful patterns from massive data. In recent years, with increasing of modern technologies and huge use of internet there a lot of data is being produced. Extraction of important and significant patterns from this extreme large data repository and data sources is not that much easy. Moreover. relating these interesting patterns in real-life scenario is also very tough. The mining of useful and important information refers to the acquisition of previously unknown knowledge (e.g. frequent item-set) from extremely large data collections.
+Data uncertainty is an inherent property in various applications due to reasons such as hardware fault, the uncertainty of incidents, outdated sources or imprecise/incorrect measurement. In the age of big data, uncertainty is one of the defining characteristics of data. Data is constantly growing in volume, variety, velocity and uncertainty. In a large range of application domains, uncertain data is found in abundance. On the World Wide Web, data from sensor networks like GPS, weather detection machines, within enterprises both in their structured and unstructured sources, biological data, meteorological trends, of the medical behavior of living organisms data, human behavior, are the example of uncertain data. To solve finding interesting patterns from uncertain data, several approaches have been proposed ~\cite{DBLP:journals/tkde/ZhaoYN14}, ~\cite{DBLP:conf/kdd/AggarwalLWW09}, ~\cite{DBLP:conf/pakdd/LeungT13}, ~\cite{DBLP:conf/dasfaa/LeungT12}.
 
-Data mining is defined as a process of discovering important, potentially useful and valuable patterns from extremely large volumes of data. In finding interesting and significant relations, support is used as an indicator to find out if the pattern is interesting or not. The term Data Mining or Knowledge Discovery in Databases have been adopted for a field of research dealing with the automatic discovery of implicit information or knowledge within databases. Data mining is generally utilized by organizations (e.g., financial, retail, marketing and communication organizations) with a strong consumer focus. Found knowledge from mining result of can be used to relating association rules between objects, incidents, processes, finding the actual and correct strategy to C2C (consumer to consumer) marketing, B2B (business to business) marketing, B2C (business to consumer) marketing, and other marketing policy determination etc. In telecommunication industry, finding interesting valuable patterns for multidimensional analysis of telecommunication data, fraudulent pattern analysis, unusual patterns identification, and mobile telecommunication services the pattern mining helps a lot. In the medical science, semantic integration of heterogeneous, distributed genomic and proteomic databases, alignment, indexing, similarity search and comparative analysis, multiple nucleotide sequences, pattern mining in KDD process is very helpful. Moreover, in data warehouses, for data pre-processing and different data visualization this data mining process is very useful. In genetic algorithm analysis and finding characteristic of human, frequent pattern mining process is used. Discovery of structural patterns, analysis of genetic networks and protein pathways, association and path analysis, visualization tools in genetic data analysis, data mining is very much effectively used process.
+In the modern age, there are much more instruments we are being used to like smart-phones, smart-gears (e.g. smart watch, smart glass). All the devices have many more sensors those are collecting data each and every micro second. But all the data from the sources are imprecise or incorrect. For example, a temperature sensor gives some information like current temperature is 40 degree, with 5\%-10\% error. This makes this data imprecise and uncertain. Due to the modernization of civilization and advancement of technology, data storm is created from many applications such as sensor networks, Web click streams and many other real life technology oriented sources. This necessitates efficient techniques discovery for extracting useful information from streams of data. For stream data mining ~\cite{DBLP:conf/icdm/LeungK06}, ~\cite{DBLP:journals/vldb/CormodeH10} have been proposed. But none of them can handle uncertain stream data.
 
-Data uncertainty is an inherent property in various applications due to reasons such as hardware fault, the uncertainty of incidents, outdated sources or imprecise/incorrect measurement. In the age of big data, uncertainty is one of the defining characteristics of data. Data is constantly growing in volume, variety, velocity and uncertainty. In a large range of applications domains uncertain data is found in abundance. Today on the World Wide Web, data from sensor networks like GPS, weather detection machines, within enterprises both in their structured and unstructured sources, biological data, meteorological trends, of the medical behavior of living organisms’ data, human behavior, are the example of uncertain data. Customer name of a super shop is a real life example of uncertain data. For example, there exist several customers named Mrs./Mr X registered in a super shop but if we want a particular Mrs./Mr. X then we will not certainly be able to find her/him by name.
-
-In the modern age, there are much more instruments we are being used to like smart-phones, smart-gears (e.g. smart watch, smart glass). All the devices have many more sensors those are collecting data each and every micro second. But all the data from the sources are imprecise or incorrect. For example, a temperature sensor gives some information like current temperature is 40 degree, with 5\%-10\% error. This makes this data imprecise and uncertain. Moreover, features like weather forecast are inherently uncertain. For example, today's weather forecast may be rainy but it has only 65\% confidence. There are many cases when information acquired from human experiences is not reliable and precise. Different people can describe the same incident in different view and perspective. As an example, in a bird viewing event Mr. C saw a crow flying by. But, Mr. D thinks it was a raven. So, uncertainty values can be attached with these observations like the bird has 75\% probability to be crowd and 20\% probability to be a raven.
-Tom mine interesting patterns from static database ~\cite{apriori}, ~\cite{fp_growth}, ~\cite{close_1}, ~\cite{closet}, ~\cite{closet_plus}, ~\cite{close_2} have been proposed. To solve finding interesting patterns from uncertain data several approaches has been proposed ~\cite{u_priori},, ~\cite{uf_growth}, ~\cite{ufp_growth}, ~\cite{uh_mining}, ~\cite{puf_growth}, ~\cite{cuf_growth}, ~\cite{uncertain_01}, ~\cite{uncertain_02}, ~\cite{uncertain_03}, ~\cite{uncertain_04}, ~\cite{uncertain_05}, ~\cite{uncertain_06}. For stream data mining ~\cite{ds_tree}, ~\cite{stream_01}, ~\cite{stream_02}, ~\cite{stream_03}, ~\cite{stream_04}, ~\cite{stream_05} has been proposed. But none of them can handle uncertain stream data. For uncertain stream data SUF-growth [~\cite{suf_growth} ] has been proposed. This is an exact algorithm. Constructed tree with this approach is very much sparse which affects in the mining process. 
+In this paper, we have emphasized on the two such most important problems of the state-of-the-arts research. For uncertain stream data SUF-growth ~\cite{DBLP:conf/icde/LeungH09} has been proposed. This is an exact algorithm that has resolved the false positive and false negative generation but the constructed tree structure is like UF-growth ~\cite{DBLP:conf/kdd/GadeWK04} that suffers much because the data structure (tree) SUF-growth ~\cite{DBLP:conf/icde/LeungH09} uses to keep information is not compact rather sparse which affects in the mining process and degrades performance. Hence,we have proposed a probabilistic sliding window based efficient and optimized approach for handling uncertain data stream. A new memory efficient and optimized data structure, i.e., US-tree (Uncertain Stream-tree) has been proposed as well that stores most recent meta-information for mining.
 
 Our key contributions of this paper are listed below:
 \begin{itemize}
@@ -77,314 +62,250 @@ Our key contributions of this paper are listed below:
   \item A new mining algorithm \emph{USFP-growth} algorithm, that will reduce mining time surprisingly.
   \item Propose an approach, which will both runtime and memory efficient, scalable and will have wide range of applicable area.
   \end{itemize}
-We have carried out the thesis work to consummate the objectives. An outline of rest of the chapters is provided as follows. Chapter 2 describes the necessary related works and existing approaches. Chapter 3 provides the details of our proposed approach with required analysis. Experimental results in detail with comparison and analysis are given in Chapter 4. Chapter 5 ends the thesis with a brief conclusion and future scopes.
+  
+An outline of rest of the sections is: Section \ref{Related_work} describes the necessary related works and existing approaches. Section \ref{proposedWork} provides the details of our proposed approach with required analysis. Experimental results in detail with comparison and analysis are given in Section \ref{Experiment}. Section \ref{Conclusion} ends the thesis with a brief conclusion and future scopes.
 
-\section{Related Work}
-\input{table/table_uncertain_transaction}
-Many algorithms have been developed for finding frequent item-sets from uncertain databases. Among them, some are Apriori ~\cite{apriori} like approach and others are FP-growth ~\cite{fp_growth} like approach. U-Apriori ~\cite{u_priori} was proposed to mine uncertain frequent pattern that is Apriori-like candidate generation and test-based approach. UF-growth ~\cite{uf_growth}, UFP-growth ~\cite{ufp_growth} was proposed to mine frequent patterns from uncertain data but the generated tree is not compact. CUF-growth ~\cite{cuf_growth}, CUF-growth\textsuperscript{*} ~\cite{cuf_growth}, PUF-growth ~\cite{puf_growth} was proposed later for mining uncertain data but they produce false positives as they works with probabilistic uncertainty modeling. All of them are unable to mine stream of uncertain data. UF-stream ~\cite{suf_growth} and SUF-growth ~\cite{suf_growth} proposed to mine uncertain frequent pattern from stream. UF-stream ~\cite{suf_growth} suffers from both false positives and false negatives. The SUF-growth ~\cite{suf_growth} is an exact mining algorithm that has resolved the false positive and false negative generation but the constructed tree structure is like UF-growth ~\cite{uf_growth} that suffers much because the data structure (tree) SUF-growth ~\cite{suf_growth} use to keep information is not compact. Before elaborate discussion of SUF-growth ~\cite{suf_growth} we will provide a brief discussion on the background of uncertain stream mining approaches.
+\section{Related Work}\label{Related_work}
+\begin{table}
+\centering
 
-UF-streaming ~\cite{suf_growth} was proposed to mine frequent item from uncertain stream data. This is a sliding window approach, that capture most recent data, as most recent data is most important. It has divided the transaction stream data in several batch each batch is inserted into the tree structure that is UF-tree ~\cite{uf_growth} and mine each tree using UF-growth ~\cite{uf_growth} and put all the frequent patterns found in a UF-stream structure. For avoiding false negative they have used a value \emph{preMinSup} less than minimum support (0 < \emph{preMinSup}< minimum support). Then until the window is completed the frequent item-set is put into UF-stream tree structure. This has addressed the problems of stream uncertain data mining, but it suffers from some problems like : Un-necessary mining each batch. Let window size is 3 and batch size is 2. If one wants the mining result at window 50 then in this approach it is needed to mine each of 1 to 50 batchs for getting the result, used tree structure is UF-tree and is not compact, extra data structure for keeping frequent item-set UF-stream tree structure, false positive generation in the mining process, false negative generation in the mining process, this has high running time and memory consumption.
+\begin{tabular}{|c|c|c|c|c|c|}
+\hline
+	Batch No& Transaction No & \multicolumn{4}{c|}{Items in Transaction} \\ \hline \hline
+	\multirow{3}{*}{Batch 1}	&	T\textsubscript{1} & a(0.9) & c(0.54) & d(0.45) & e(0.18)		\\
+								&	T\textsubscript{2} & a(0.9) & b(0.36) & e(0.09) & --			\\
+								&	T\textsubscript{3} & a(0.2) & c(0.18) & d(0.63) & --			\\\hline
+	\multirow{3}{*}{Batch 2}	&	T\textsubscript{4} & b(0.3) & c(0.27) & --  	& --			\\
+								&	T\textsubscript{5} & a(0.1) & b(0.03) & c(0.27) & --  			\\
+								&	T\textsubscript{6} & a(0.9) & e(0.27) & --	    & --  			\\\hline
+	\multirow{3}{*}{Batch 3}	&	T\textsubscript{7} & a(0.1) & d(0.06) & e(0.12) & --			\\
+								&	T\textsubscript{8} & a(0.1) & c(0.02) & f(0.12) & --   			\\
+								&	T\textsubscript{9} & c(0.2) & d(0.09) & f(0.54) & --   			\\\hline
+								
+	\multirow{3}{*}{Batch 4}	&	T\textsubscript{10} &  --  &  --  &  --  & --    				\\
+								&	T\textsubscript{11} &  --  &  --  &  --  & --    				\\
+								&	T\textsubscript{12} &  --  &  --  &  --  & --    				\\\hline
+	\end{tabular}
+\caption{Example of Uncertain Stream Transaction (divided into batches and windows)}
+\label{table:prefix_assigned}
+\end{table}
 
-SUF-growth ~\cite{suf_growth} addressed the limitations exist in UF-streaming ~\cite{suf_growth}. SUF-growth algorithm outperforms over UF-streaming algorithm. It improves over UF-streaming by avoiding the aforementioned potential problems for mining frequent item-set from streams of uncertain data. SUF-growth is an exact algorithm. Its means SUF-growth returns only truly frequent item-set. Where UF-streaming returns both true and false frequent item-set. It uses the only \emph{minsup}. No need to use \emph{preMinsup}. There also have any problem of finding an appropriate value of \emph{preMinsup}. This algorithm does not need UF-stream structure to store the mined item-sets. Need transaction databases in memory resident for assumed performance. Instead of this its use delayed mode for mining. As a result, unnecessary computation could be reduced and unnecessary mining is avoided.
-        \begin{figure}[]
+Many algorithms have been developed for finding frequent item-sets from uncertain databases. Among them, some are Apriori ~\cite{DBLP:conf/vldb/AgrawalS94} like approach and others are FP-growth ~\cite{DBLP:journals/datamine/HanPYM04} like approach. U-Apriori ~\cite{DBLP:journals/tkde/ZhaoYN14} was proposed to mine uncertain frequent pattern that is Apriori-like candidate generation and test-based approach. UF-growth ~\cite{DBLP:conf/kdd/GadeWK04}, UFP-growth ~\cite{DBLP:conf/kdd/AggarwalLWW09} was proposed to mine frequent patterns from uncertain data but the generated tree is not compact. CUF-growth ~\cite{DBLP:conf/dasfaa/LeungT12}, CUF-growth\textsuperscript{*} ~\cite{DBLP:conf/dasfaa/LeungT12}, PUF-growth ~\cite{DBLP:conf/pakdd/LeungT13} was proposed later for mining uncertain data but they produce false positives as they work with probabilistic uncertainty modeling. All of them are unable to mine stream of uncertain data. UF-stream ~\cite{DBLP:conf/icde/LeungH09} and SUF-growth ~\cite{DBLP:conf/icde/LeungH09} proposed to mine uncertain frequent pattern from stream. UF-stream ~\cite{DBLP:conf/icde/LeungH09} suffers from both false positives and false negatives. 
+
+The SUF-growth ~\cite{DBLP:conf/icde/LeungH09} is an exact mining algorithm that has resolved the false positive and false negative generation but the constructed tree structure is like UF-growth ~\cite{DBLP:conf/kdd/GadeWK04} that suffers much because the data structure (tree) SUF-growth ~\cite{DBLP:conf/icde/LeungH09} use to keep information is not compact. Before elaborate discussion of SUF-growth ~\cite{DBLP:conf/icde/LeungH09}, we have provided a brief discussion on the background of uncertain stream mining approaches.
+
+UF-streaming ~\cite{DBLP:conf/icde/LeungH09} was proposed to mine frequent item from uncertain stream data. This is a sliding window-based approach, that capture most recent data. It has divided the transaction stream data in several batches, each batch is inserted into the tree structure that is UF-tree ~\cite{DBLP:conf/kdd/GadeWK04} and mine each tree using UF-growth ~\cite{DBLP:conf/kdd/GadeWK04} and put all the frequent patterns found in a UF-stream structure. For avoiding false negative, it uses a value \emph{preMinSup} less than minimum support (0 $<$ \emph{preMinSup} $<$ minimum support). Then until the window is completed, the frequent item-set is put into UF-stream tree structure. This has addressed the problems of stream uncertain data mining, but it suffers from some problems like : Unnecessary mining of each batch. As an example, say, window size is 3 and batch size is 2. If one wants the mining result at window 50 then in this approach it is needed to mine each of 1 to 50 batches for getting the result.
+
+SUF-growth ~\cite{DBLP:conf/icde/LeungH09} addressed the limitations exist in UF-streaming ~\cite{DBLP:conf/icde/LeungH09} and outperformed it by avoiding the aforementioned potential problems for mining frequent item-set from streams of uncertain data. SUF-growth is an exact algorithm. It means SUF-growth returns only truly frequent item-set but UF-streaming returns both true and false frequent item-set. This algorithm does not need UF-stream structure to store the mined item-sets. It requires transaction databases in memory resident for assumed better performance. Instead of this it uses delayed mode for mining. As a result, unnecessary computation could be reduced and unnecessary mining is avoided.
+
+        \begin{figure*}[tb]
         \centering
-            \includegraphics[width=.45\textwidth]{images/suf_simulation}
-        \caption{SUF-growth ~\cite{suf_growth} tree construction}
+            \includegraphics[width=\textwidth]{visio/SUF}
+        \caption{SUF-growth ~\cite{DBLP:conf/icde/LeungH09} tree construction}%%%%%%%%%%%%%%%
         \label{figure:suf_simulation}
-        \end{figure}
-Considering the advantages of SUF-growth over others algorithm, there is the question. The is how SUF-growth ~\cite{suf_growth} algorithm find frequent item-sets from streams of uncertain data using a new tree structure called SUF-tree. Now we describe this. We ﬁrst construct an SUF-tree, and then extract relevant paths from this SUF-tree (which is a global tree) to recursively from smaller UF-trees for projected databases. Due to the dynamic nature and Property 2 of data streams, expected the support of items is continuously affected by the arrival of new batches (and the removal of the contents of older batches). Arranging items in the frequency-dependent order in the SUF-tree may lead to swapping which, in turn, can cause merging and splitting—off tree nodes when the global frequencies of items change. Hence, in the SUF-tree, items are arranged according to some canonical order (e.g. lexicographic order), which can be speciﬁed by the user prior to the construction of the SUF-tree or the mining process. Consequently, the SUF-tree can be constructed using only one scan of the streams of uncertain data, and the resulting SUF-tree captures the contents of the streams. Moreover, the SUF-tree preserves the usual tree properties. The occurrence count of a node is at least as high as the sum of occurrence counts of its children.The ordering of items is unaffected by the continuous changes in the expected support values of items.
+        \end{figure*}
 
-For example for table-\ref{table:uncertain_stream_transaction} transaction database let construct the SUF-tree. Figure-\ref{figure:suf_simulation} shows the construction of the SUF-tree. Here as the stuff tree is based on UF-tree construction approach the node sharing is very rare. From figure-\ref{figure:suf_simulation} it’s clearly visible that the node sharing is not that much impressive as the node should be shared if the two same item has same existential probability and in real life scenario this sharing is very rare. For this reason \emph{a(0.9)} in \emph{T\textsubscript{1}} and \emph{a(0.2)} in \emph{T\textsubscript{3}} did not share single node and the tree compactness could not be accomplished. Although the SUF-growth has resolved some limitations of UF-streaming ~\cite{suf_growth}, some limitations still exist. Tree structure it uses is UF-tree ~\cite{uf_growth} structure which suffers from compactness. So SUF-growth tree also inherits this limitation, tree construction cost will be much more (both running time and memory) as the transaction grows, mining algorithm it uses is FP-growth like the approach that generates a huge candidate sub-pattern tree that costs much in the mining time. It increased mining cost (both running time and memory).
+% if needed be then this paragraph can be removed
+SUF-growth ﬁrst constructs an SUF-tree, and then extracts relevant paths from the SUF-tree (which is a global tree) to recursively from smaller UF-trees for projected databases. Due to the dynamic nature and Property of data streams, expected support of items is continuously affected by the arrival of new batches (and the removal of the contents of older batches). Arranging items in the frequency-dependent order in the SUF-tree may lead to swapping which, in turn, can cause merging and splitting—off tree nodes when the global frequencies of items change. Hence, in the SUF-tree, items are arranged according to some canonical order (e.g. lexicographic order), which can be specified by the user prior to the construction of the SUF-tree or the mining process. Consequently, the SUF-tree can be constructed using only one scan of the streams of uncertain data, and the resulting SUF-tree captures the contents of the streams. Moreover, the SUF-tree preserves the usual tree properties. The occurrence count of a node is at least as high as the sum of occurrence counts of its children. The ordering of items is unaffected by the continuous changes in the expected support values of items.
+
+For example, for the transaction database of Table-\ref{table:prefix_assigned}, the SUF-tree is in Figure-\ref{figure:suf_simulation}. The figure shows the construction of the SUF-tree step-by-step. As the suf tree is based on UF-tree construction approach, the node sharing is very rare. From Figure-\ref{figure:suf_simulation}, it is clearly visible that the node sharing is not that much impressive as the node should be shared if the two same item has same existential probability and in real life scenario this sharing is very rare. For this reason \emph{a(0.9)} in \emph{T\textsubscript{1}} and \emph{a(0.2)} in \emph{T\textsubscript{3}} did not share single node and the tree compactness could not be accomplished. 
+
+Although the SUF-growth has resolved some limitations of UF-streaming ~\cite{DBLP:conf/icde/LeungH09}, some limitations still exist. The tree structure that it uses is UF-tree ~\cite{DBLP:conf/kdd/GadeWK04} structure which suffers from compactness. So SUF-growth tree also inherits this limitation, tree construction cost will be much more (both running time and memory) as the transaction grows, mining algorithm it uses is FP-growth like approach that generates a huge candidate sub-pattern tree that costs much in the mining time. It increased mining cost (both running time and memory).
     
-\section{Our Proposed Approach}
-For stream property, we will always lose data after data stream has flown away. To resolve this, we will propose a sliding window based approach, where we will keep the most recent information in a tree structure as the most recent data is most valuable. Later we will show how the window will slide, remove old data and insert new data in the tree. As, for uncertain data stream each same item in the different transaction has different existential probability, it becomes very difficult to merge (share) these nodes in the tree. This uncertainty property of item makes the tree huge. We have proposed a new \emph{U\textsuperscript{cap}} value for each item that helps to share a single node when constructing the tree which we named as \emph{US-tree}. We will show that our proposed tree \emph{US-tree} will be very compact and very efficient for later mining. Later, we will describe an approach for mining the \emph {US-tree} named \emph{USFP-growth} which is \emph{FP-growth} like approach. Later we will propose a method for filtering and removing false positives generated by our approach in the most probable candidate frequent patterns.
+\section{Our Proposed Approach}\label{proposedWork}
+For stream property, we will always lose data after data stream has flown away. To deal with this, we proposed a sliding window based approach, where we keep the most recent information. For uncertain data stream, each item in different transaction has different existential probability, it becomes very difficult to merge (share) these nodes in the tree. This uncertainty property of items makes the tree unmanageable and large. We have proposed a new \emph{U\textsuperscript{cap}} value for each item that helps to share a single node when constructing the tree which we named as \emph{US-tree}. Our proposed tree \emph{US-tree} is very compact and very efficient for later mining. Later, we have described an approach for mining the \emph{US-tree}, named \emph{USFP-growth}, which is \emph{FP-growth} like approach. After that a method, for filtering and removing false positives generated by our approach in the most probable candidate frequent patterns, is proposed.
 
+\begin{figure*}[tb]
+  \centering
+	\includegraphics[width=\textwidth]{visio/sim_1_6}  
+	\caption{Constructing US-tree}%%%%%%%%%%%%%%%%%
+	\label{figure:t1_6}
+\end{figure*}
 
+\begin{figure*}[tb]
+  \centering
+	\includegraphics[width=\textwidth]{visio/sim_06_slide_789}  
+	\caption{Updating US-tree with new sliding window}%%%%%%%%%%%%%%%%
+	\label{figure:t7_9}
+\end{figure*}
 
 \subsubsection{Preliminaries}
-    \paragraph{Batch and Window: }
-    A group of consecutive transactions from a transaction \emph{DB}inserted in \emph{US-tree} at a time. Let table-\ref{table:uncertain_stream_transaction} batch size = \emph{3}. \emph{T\textsubscript{1}, T\textsubscript{2}, T\textsubscript{3}} is one batch and its batch-1. Then next three \emph{T\textsubscript{4}, T\textsubscript{5}, T\textsubscript{6}} is one batch and its batch-2. Window is the size of consecutive batchs one \emph{US-tree} can hold. Let table-\ref{table:transaction_batch} be an example of grouped transaction and batch number tagged. So for window size \emph{2} The in a certain time batch-1 and batch-2 will create a window. Then after some times when batch-3 comes then batch-2 and batch-3 will create the next window.
+    \paragraph{Batch and Window:}
+A group of consecutive transactions from a transaction \emph{DB} is inserted into \emph{US-tree} at a time. Consider the database of Table-\ref{table:prefix_assigned} batch size = \emph{3}. \emph{T\textsubscript{1}, T\textsubscript{2} and T\textsubscript{3}} belongs to $Batch_{1}$. Then next three transactions \emph{T\textsubscript{4}, T\textsubscript{5} and T\textsubscript{6}} are placed in $batch_{2}$. Window is the size of consecutive batches that one \emph{US-tree} can hold. Let Table-\ref{table:prefix_assigned} be an example of grouped transaction and batch number tagged. So, for a window of size \emph{2}, at first, $Batch_1$ and $Batch_2$ create a window. Then after some times when $Batch_3$ comes, $Batch_2$ and $Batch_3$ create the next window.
     
     \paragraph{U\textsuperscript{cap}: }
     The following equation is for \emph{U\textsuperscript{cap}} calculation.
-    \input{example/eqn_cap}
-    For transaction \emph{DB} example in table-\ref{table:uncertain_stream_transaction} for \emph{T\textsubscript{1}}, \emph{U\textsuperscript{cap}} of \emph{a{0.9}} is $0.9$ as a is the first item. For \emph{c(0.6)} \emph{U\textsuperscript{cap}} is $0.9*0.6=0.45$, \emph{d(0.50)} \emph{U\textsuperscript{cap}} is $0.9*0.5=0.45$ and \emph{e(0.2)} \emph{U\textsuperscript{cap}} is $0.9*0.2=0.18$. \emph{U\textsuperscript{cap}} is the upper bound of existential probability. As we are taking the max of all previous items coming in a particular order all items or item sets having existential probability must be less than or equal \emph{U\textsuperscript{cap}}. that is $\forall(i,j)\{ P(I_i)*P(I_j)\leq U_{cap}(I_j)\}$ where $i < j$. So support must be less than or equal \emph{U\textsubscript{cap}}.
-    Calculated \emph{U\textsuperscript{cap}} should be the upper bound of two item's existential probability because we have taken the maximum value of item that has come earlier. So, by two item set support that can have maximum support value, is \emph{U\textsuperscript{cap}} value. Item set having \emph{U\textsuperscript{cap}} less than minimum support must frequent. Though this may cause some false positives but it is for sure that no false negative will insert into this. 
-  \input{table/table_uncertain_transaction_batch}
+	{\footnotesize
+    \begin{equation}\label{equation:cap}
+	\text{\emph{U\textsuperscript{cap}}}(X_r) =\begin{cases}
+				P(X_1), & \text{if $ h = 1$}\\
+				P(X_r)*M, & \text{if $ h > 1$}
+             
+		\end{cases}
+where,\\ M=max_{1\leq q\leq h}P(X_q)
+\end{equation}}
+
+For the transaction \emph{DB} in Table-\ref{table:prefix_assigned}, for \emph{T\textsubscript{1}}, \emph{U\textsuperscript{cap}} of \emph{$a${0.9}} is $0.9$ as $a$ is the first item. For \emph{$c$(0.6)} \emph{U\textsuperscript{cap}} is $0.9*0.6=0.45$, \emph{$d$(0.50)} \emph{U\textsuperscript{cap}} is $0.9*0.5=0.45$ and \emph{$e$(0.2)} \emph{U\textsuperscript{cap}} is $0.9*0.2=0.18$. To recall, \emph{U\textsuperscript{cap}} is the upper bound of existential probability. As we are taking the max of all previous items coming in a particular order, all items or item sets having existential probability must be less than or equal to \emph{U\textsuperscript{cap}}, that is, $\forall(i,j)\{ P(I_i)*P(I_j)\leq U_{cap}(I_j)\}$, where $i < j$. So support must be less than or equal to \emph{U\textsubscript{cap}}.
+
+Calculated \emph{U\textsuperscript{cap}} should be the upper bound of two item's existential probability, because, we have taken the maximum value of item that has come earlier. Item set having \emph{U\textsuperscript{cap}} less than minimum support must frequent. Though this may produce some false positives but it is guaranteed that no false negative will be generated.
       
-Our proposed algorithm is divided into five steps. (1) Grouping transactions into batches and window and giving each item in a transaction a prefix value is called \emph{U\textsuperscript{cap}}. (2) Insert transaction into \emph {US-tree}. (3) Sliding the \emph {US-tree} (4) mining the \emph {US-tree} with \emph{USFP-growth} algorithm and (5) Eliminating false positive (not frequent but exists infrequent item set) . For simulating our approach we consider Table~\ref{table:uncertain_stream_transaction} as uncertain stream transaction data. For this simulation, we consider window size as 2 and batch size 3. That means 3 transactions creates a batch and 2 batches create a window. After completing window construction (inserting batch 1 and 2), the \emph {US-tree} will be full. When new batch comes we slide the window. That means we remove oldest batch batch-1 and put batch-2 as the old batch. Then insert new batch in the tree as batch-3. So for window size 2 the tree always contains at most 2 batches. Thus, the tree always holds the latest information. In next subsections, we will elaborately explain our approach of every step.
-
-
+Our proposed algorithm is divided into five steps. (1) Grouping transactions into batches and windows and assigning each item in a transaction a prefix value, i.e., \emph{U\textsuperscript{cap}}. (2) Inserting transactions into \emph {US-tree}. (3) Sliding the \emph {US-tree} (4) mining the \emph {US-tree} with \emph{USFP-growth} algorithm and (5) Eliminating false positive (not frequent but presents in US-tree). To illustrate our approach, consider a window of size = 2 and batches of size = 3. When new batch arrives, the window need to be slide. That means we remove oldest batch, $Batch_1$, and put $Batch_2$ as a new batch. Then, we insert new batch in the tree as $Batch_3$. So, for window size of 2, the tree always contains at most 2 batches. Thus, the tree always holds the latest information. In next subsections, we will elaborately explain our approach of every step.
 
 \subsubsection{Preparation}
 
- \input{table/table_prefix}
-    In this section we will describe the batch and window grouping and the prefix value \emph{U\textsuperscript{cap}} calculation. First we calculate batch and window calculation and grouping our transaction data. As we describe earlier for the example Table-\ref{table:uncertain_stream_transaction} easy simulation we take batch size as \emph{$3$} and window size as \emph{$2$}. So first \emph{$3$} transactions \emph{T\textsubscript{1}}, \emph{T\textsubscript{2}} and \emph{T\textsubscript{3}} are grouped and labeled as \emph{Batch-1}. Then next \emph{$3$} \emph{T\textsubscript{4}}, \emph{T\textsubscript{5}} and \emph{T\textsubscript{6}} are grouped together and labeled as \emph{Batch-2}. Next \emph{$3$} \emph{T\textsubscript{7}}, \emph{T\textsubscript{8}} and \emph{T\textsubscript{9}} are grouped together and labeled as \emph{Batch-3}. Thus the consecutive next \emph{$3$} transaction should be grouped as batch and ready to be inserted into \emph{US-tree}. As our window size is $2$, after inserting two batches into the \emph{US-tree} the window will be completed. Before inserting next batch \emph{Batch-3} we need to remove \emph{Batch-1}(oldest one) from tree and move \emph{Batch-2} to \emph{Batch-1 's} position and then insert new batch, \emph{Batch-3}. Thus the latest information is inserted and kept into the \emph{US-tree}. table-\ref{table:transaction_batch} shows the window and batch grouped for stream transaction example table-\ref{table:uncertain_stream_transaction}.
-    For this calculation we earlier proposed an equation-\ref{equation:cap}. From this equation we can create \emph{U\textsuperscript{cap}} for each item in a transaction. To calculate one transaction, for each item in a transaction, if item is the first item in a transaction than item's existential probability is its \emph{U\textsuperscript{cap}} value, otherwise item's \emph{U\textsuperscript{cap}} is max of previous items existential probability multiplied by item's  own existential probability. For example, let Table-\ref{table:transaction_batch} T1 is \emph{a(0.9), c(0.6), d(0.5), e(0.2)}. 
-  
-In this transaction item \emph{a(0.9)} is the first item. So its \emph{U\textsuperscript{cap}} is 0.9.
+%\input{table/table_prefix}
 
-For second item, \emph{c(0.60)} previous item is only \emph{a(0.90)}. So c's $\emph{U\textsuperscript{cap}} = 0.9*0.6 = 0.54$.
+In this section, we will describe the batch and window grouping and the prefix value \emph{U\textsuperscript{cap}} calculation. First, we perform batch and window calculation as well as grouping of our transactions. For Table-\ref{table:prefix_assigned}, batch size = \emph{$3$} and window size = \emph{$2$}, first \emph{$3$} transactions \emph{T\textsubscript{1}}, \emph{T\textsubscript{2}} and \emph{T\textsubscript{3}} are grouped and labeled as $Batch_{2}$. Then next \emph{$3$} \emph{T\textsubscript{4}}, \emph{T\textsubscript{5}} and \emph{T\textsubscript{6}} are grouped together and labeled as $Batch_{2}$. Next \emph{$3$} \emph{T\textsubscript{7}}, \emph{T\textsubscript{8}} and \emph{T\textsubscript{9}} are grouped together and labeled as $Batch_{3}$. It implies, the consecutive  \emph{$3$} transactions should be grouped as batches and prepared to be inserted into \emph{US-tree}. As our window size is $2$, after inserting two batches into the \emph{US-tree} the window will be completed. Before inserting next batch $Batch_{3}$, we need to remove $Batch_{1}$(oldest one) from tree and left slide $Batch_{n}$ to the position of $Batch_{n-1}$ and then insert new batch. Thus the latest information is inserted and kept into the \emph{US-tree}. Table-\ref{table:prefix_assigned} shows the window and batch grouped for stream transactions.
 
-For third item, \emph{d(0.50)} there are two items before it, \emph{a(0.9)} and \emph{c(0.6)}. Among them \emph{a} has max existential probability, that is \emph{0.9}. So \emph{d's } $\emph{U\textsuperscript{cap}} = 0.9*0.5 = 0.45$.
+For this calculation we earlier proposed an equation-\ref{equation:cap}. From this equation, we can create \emph{U\textsuperscript{cap}} for each item in a transaction. To calculate one transaction, for each item, if the item is first one then its existential probability is \emph{U\textsuperscript{cap}} value of its own, otherwise item's \emph{U\textsuperscript{cap}} is maximum of previous items existential probability multiplied by item's own existential probability. For example, let Table-\ref{table:prefix_assigned} $T_{1}$ is \emph{$a$(0.9), $c$(0.6), $d$(0.5), $e$(0.2)}. In this transaction, item \emph{$a$(0.9)} is the first item. So its \emph{U\textsuperscript{cap}} is 0.9. For second item, \emph{$c$(0.60)}, previous item is only \emph{a(0.90)}. So $c$'s $\emph{U\textsuperscript{cap}} = 0.9*0.6 = 0.54$.
 
-For fourth item \emph{e(0.2)} there are three items before it, \emph{a(0.9)} ,\emph{c(0.6)} and \emph{d(0.5)}. Among them \emph{a} has max existential probability is \emph{0.9}. So \emph{e's}  $\emph{U\textsuperscript{cap}} = 0.9*0.2 = 0.45$. Thus we can calculate each item's \emph{U\textsuperscript{cap}} value for a transaction. For easier understanding we have calculated all the item's \emph{U\textsuperscript{cap}} of Table-\ref{table:transaction_batch} and put into Table-\ref{table:prefix_assigned}.
+For the third item, \emph{$d$(0.50)}, there are two preceding items, \emph{$a$(0.9)} and \emph{$c$(0.6)}. Among them, \emph{$a$} has maximum existential probability, that is, \emph{0.9}. So \emph{$d$'s} $\emph{U\textsuperscript{cap}} = 0.9*0.5 = 0.45$. For the fourth item \emph{e(0.2)}, there are three preceding items, \emph{$a$(0.9)} ,\emph{$c$(0.6)} and \emph{$d$(0.5)}. Among them, \emph{$a$} has maximum existential probability, that is, \emph{0.9}. So \emph{$e$'s} $\emph{U\textsuperscript{cap}} = 0.9*0.2 = 0.45$. Thus, we can calculate \emph{U\textsuperscript{cap}} value of each item for a transaction. All the item's \emph{U\textsuperscript{cap}} is depicted in Table-\ref{table:prefix_assigned}.
+
+\begin{figure*}[t]
+    \begin{minipage}{0.5\linewidth}
+    \centering
+	\includegraphics[width=0.9\textwidth]{visio/us_tree}  
+	\caption{Snapshot of US-tree with Header Table}%%%%%%%%%%%%%%%
+	\label{figure:US_TREE_HEADER_TABLE}
+    \end{minipage}%
+    \begin{minipage}{0.5\linewidth}
+    \centering
+	\includegraphics[width=0.9\textwidth]{visio/M_TREE}  
+	\caption{$e$-cond Tree and corresponding Header Table}%%%%%%%%%%%%%%%
+	\label{figure:E_COND_TREE_HEADER_TABLE}
+    \end{minipage}
+\end{figure*}
+
+\begin{figure}[t]
+    \centering
+	\includegraphics[width=0.5\textwidth]{visio/frequent_tree_final_ex}  
+	\caption{Frequent Patterns, Transaction (non-frequent removed), Frequent Pattern-tree with False positives in red}%%%%%%%%%%%%%%%
+	\label{figure:FALSE_NEGATIVE}
+\end{figure}
 
 \subsubsection{US-tree Construction}
-As described earlier about our batch and window. A batch should be inserted into the tree in its own window slot. After inserting all batches, the window will be complete and be ready to mine. We said earlier section that our tree will be very compact. For this we have proposed an approach for sharing nodes. For sharing same tree nodes two items with same id and order should not care about own existential probability. If item is already in the tree with same id then two items should share the node. Thus the tree will be very compact. When inserting an item in the tree the \emph{U\textsuperscript{cap}} of the tree should be updated by adding the prefix value of the node. Thus each batch should be inserted into the tree.
-    \input{example/sim_tree_winone}
-    Let construct tree for Table-\ref{table:prefix_assigned}. First we insert \emph{Batch-1 (T\textsubscript{1}, T\textsubscript{2}, T\textsubscript{3})} in the window 1. First when inserting the \emph{T\textsubscript{1} - a(0.9), c(0.54), d(0.45), e(0.18)} we insert item \emph{a(0.9)} as a child of root \emph{\{\}} (Figure-\ref{figure:t1}). Update a's prefix value as $0.9$. Then we add \emph{c(0.54)} as a's child update c's prefix value as $0.54$. Aad \emph{d(0.45)} as c's child update d's prefix value as $0.45$. Add \emph{e(0.18)} as d's child update e's prefix value as $0.18$. Thus \emph{T1} is inserted into the tree (Figure-\ref{figure:t1}). For \emph{T\textsubscript{2} - a(0.9), b(0.36), e(0.09)} first we insert \emph{a(0.9)}. Here we found \emph{a} is already inserted so we just update existing node a's prefix value $0.9 + 0.9 = 1.8$ (Figure-\ref{figure:t23}). Then we insert \emph{b(0.36)}. As \emph{a} has no child \emph{b} we insert a new child b and update its prefix value $0.36$. Then insert new e(0.09) as the child of \emph{b}. For \emph{T\textsubscript{3} - a(0.2), c(0.18), d(0.63)} we follow the existing path \emph{a(1.8), c(0.54), d(0.45)} and update corresponding prefix value as $1.8 + 0.2 = 2.0$, $0.54 + 0.18 = 0.72$ and $0.45 + 0.63 = 1.08$ (Figure-\ref{figure:t23}). After inserting the This \emph{T\textsubscript{3}} window 1 is completed. Then we will go for inserting next batch \emph{Batch-2 (T\textsubscript{4}, T\textsubscript{5}, T\textsubscript{6})} in the tree. For \emph{Batch-2} we shall put prefix value in the window's newest place. And thus the latest batch becomes the most recent information. For inserting \emph{T\textsubscript{4} - b(0.3), c(0.27)} we insert new node \emph{b} as there is no child b of root node \emph{\{\}}. So we insert \emph{b} as a child of root \emph{\{\}}. Update its prefix value as $0.3$. Then insert \emph{c(0.27)} as child of \emph{b} and update prefix value $0.27$. Here as this \emph{T\textsubscript{4}} is inserting in \emph{Batch-4} we update prefix value for recent batch's information. Next we insert \emph{T\textsubscript{5} - a(0.1), b(0.03), c(0.27)}. We merge \emph{a(0.1), b(0.03)} with previous \emph{a, b } nodes and update prefix value $0.1$ and $0.03$ in the second batch's portion and insert new node \emph{b} as a child of \emph{b} and update its prefix value as $0.27$ (Figure-\ref{figure:t456}).
-    \input{example/sim_tree_slide}
-    Now our window is completed and can our \emph{USFP-growth} mine \emph {US-tree}. When new transaction batch comes like \emph{Batch-3 (T\textsubscript{7}, T\textsubscript{8}, T\textsubscript{9})} comes to be inserted into the tree then first we have to slide the window. For this when we construct the tree we maintain a header table which contains the information for the oldest data. Thus pointer points to the oldest data can be found easily and slide the whole tree. Figure-\ref{figure:slide} shows the sliding and getting the old data removed tree and ready to insert next batch \emph{Batch-3}. After inserting \emph{Batch-3} we get the tree like Figure-\ref{figure:w2}. 
-    \input{example/sim_tree_wintwo}
-    In the described \emph{US-tree} construction process we see that tree sharing is very much common and regular. That makes our tree very compact and memory needed to hold items becomes less. Moreover, the tree construction time improves surprisingly. When to mine this \emph{US-tree} we can gain a lot time when mining. As the tree size is small, conditional tree will be much more less when mining. We will gain a lot time when trying to mine the conditional trees. In the experimental result section we will provide necessary graphs for our simulations.
+A batch of transactions need to be inserted into the tree in its own window slot. After inserting all batches, the window will be complete and be ready to mine. Previously, we claimed that our tree will be very compact. For this, we have proposed an approach for sharing nodes. To share same tree nodes, two items with same id and order should not care about own existential probability. If item is already in the tree with same id then two items should share the node. Thus the tree will be very compact. When inserting an item in the tree, the \emph{U\textsuperscript{cap}} of the tree should be updated by adding the prefix value of the node. Thus each batch should be inserted into the tree.
+
+To construct tree for Table \ref{table:prefix_assigned}, first, we insert \emph{$Batch_{1}$ (T\textsubscript{1}, T\textsubscript{2}, T\textsubscript{3})} in the $Window_{1}$. To insert \emph{T\textsubscript{1} - a(0.9), c(0.54), d(0.45), e(0.18)}, we insert item \emph{$a$(0.9)} as a child of root \emph{\{\}}. Update $a$'s prefix value as $0.9$. Then we add \emph{$c$(0.54)} as $a$'s child and update $c$'s prefix value as $0.54$. Then, adding \emph{$d$(0.45)} as $c$'s child and update $d$'s prefix value as $0.45$. After that \emph{$e$(0.18)} is added as $d$'s child and update $e$'s prefix value as $0.18$. Hence, \emph{$T_{1}$} is inserted into the tree as shown in part 1 of Figure \ref{figure:t1_6}.
+
+For \emph{T\textsubscript{2} - a(0.9), b(0.36), e(0.09)} first we insert \emph{$a$(0.9)}. Here we found \emph{$a$} is already inserted, so we just update existing node $a$'s prefix value $0.9 + 0.9 = 1.8$ (part 2 of Figure \ref{figure:t1_6}. Then we insert \emph{$b$(0.36)}. As \emph{$a$} has no child labeled \emph{$b$}, we insert a new child $b$ and update its prefix value to $0.36$. Then, we insert new $e$(0.09) as the child of \emph{$b$}. For \emph{T\textsubscript{3} - a(0.2), c(0.18), d(0.63)}, we follow the existing path \emph{a(1.8), c(0.54), d(0.45)} and update corresponding prefix value as $1.8 + 0.2 = 2.0$, $0.54 + 0.18 = 0.72$ and $0.45 + 0.63 = 1.08$ (part 3 of Figure \ref{figure:t1_6}. After inserting \emph{T\textsubscript{3}}, $Window_{1}$ is completed. Then we will go for inserting next batch \emph{$Batch_2$ (T\textsubscript{4}, T\textsubscript{5}, T\textsubscript{6})} in the tree. For \emph{$Batch_{2}$}, we shall put prefix value in the newest slots of the window. Thus, the latest batch becomes the most recent information container. For inserting \emph{T\textsubscript{4} - b(0.3), c(0.27)}, we insert new node \emph{$b$} as there is no child of $b$ of the root node \emph{\{\}}. So, we insert \emph{$b$} as a child of the root \emph{\{\}} node and update its prefix value to $0.3$. Then, we insert \emph{$c$(0.27)} as child of \emph{$b$} and update prefix value to $0.27$. As \emph{T\textsubscript{4}} belongs to \emph{$Batch_{4}$}, we update prefix value for recent batches. After that we insert \emph{T\textsubscript{5} - a(0.1), b(0.03), c(0.27)}. We merge \emph{a(0.1), b(0.03)} with previous \emph{a, b } nodes and update prefix value $0.1$ and $0.03$ in the slot of second batch. Finally, we insert new node \emph{$b$} as a child of \emph{$b$} and update its prefix value to $0.27$ (Figure \ref{figure:t1_6}.
+    
+Now our window is complete and we can start \emph{USFP-growth} mining in \emph {US-tree}. When new transactions and batches come, like \emph{$Batch_{3}$, i.e., (T\textsubscript{7}, T\textsubscript{8}, T\textsubscript{9})}, these need to be inserted into the tree by sliding the window. For this, when we construct the tree, we maintain a header table which contains the information for the oldest data. That is, pointer points to the oldest data and can be found easily to slide the whole tree. Figure-\ref{figure:t7_9} shows the sliding process, getting the tree with no old data and ready to insert next batch \emph{$Batch_{3}$}. After inserting \emph{$Batch_{3}$}, we get the tree like Figure-\ref{figure:t7_9}.
+  
+In the described \emph{US-tree} construction process, we see that tree sharing is very much common and regular. That makes our tree very compact and memory needed to hold items was significantly small. Moreover, the tree construction time improves surprisingly. As the tree size is small, less number of conditional trees will be generated and those will be smaller in volume. As a result those can be mined faster.
+
 \subsubsection{FPUS-growth Mining Approach}
-In this section we will discuss about our mining approach \emph{USFP-growth} That will find frequent patterns. For mining we used \emph{FP-growth} like approach. Generally, we can remove all the nodes having support less than \emph{minimum support}. From header table we get such information that which nodes is less than \emph{minimum support}. We told earlier that for \emph{U\textsuperscript{cap}} value we took the upper limit, we also can we can remove all the nodes having prefix value less than \emph{minimum support}. In this process we can eliminate most of the infrequent nodes from tree. For this purpose we used header table that was created when creating the \emph{US-tree}. Then we construct conditional tree starting from the lowest support holding node. From header table we also get the position of all nodes containing same item in the tree.
+In this section we will discuss about our mining approach \emph{USFP-growth} to find frequent patterns. For mining, we used \emph{FP-growth} like approach. Generally, we can remove all the nodes having support less than \emph{minimum support}. From header table, we get which nodes is less than \emph{minimum support}. As we mentioned earlier, for \emph{U\textsuperscript{cap}} value, we took the upper limit, hence, we can remove all the nodes having prefix value less than \emph{minimum support}. In this process, we can eliminate most of the infrequent nodes from the tree. For this purpose, we used header table that was created during the creation of \emph{US-tree}. Then we construct conditional tree starting from the lowest support holding node. From header table, we also get the position of all nodes containing same item in the tree.
 
-Let’s mine the tree we constructed earlier. Figure-\ref{figure:min_before} is \emph{US-Tree} for mining and corresponding header table before starting mining. From the header table, we get that support of \emph{a} is $3.00$, \emph{b} is $1.00$, \emph{c} is $3.30$, \emph{d} is $1.20$, \emph{e} is $0.60$. So, \emph{e} is not frequent for one item set frequent pattern. So it is sure that no item set contains \emph{e} will be frequent. That is the basic upward closure property of frequent item set. So we remove all the nodes of \emph{e} and get the new mining tree Figure-\ref{figure:min_ready} and its header table. Here we find all one item sets that are frequent and that is \emph{\{a\}, \{b\}, \{c\} \{d\}} Now we will construct conditional tree for the found frequent one item and mine the conditional tree. But items having total \emph{U\textsuperscript{cap}} less than \emph{minimum support} is not needed to construct conditional tree because this \emph{U\textsuperscript{cap}} value has been take as the upper bound. So total \emph{U\textsuperscript{cap}} value less than \emph{minimum support} indicates that item must not be exists in the $2$ or more frequent item set. So we do not construct conditional tree for these items.
+Figure-\ref{figure:US_TREE_HEADER_TABLE} shows \emph{US-Tree} for mining and corresponding header table before starting mining. From the header table, we get the support of \emph{a} = $3.00$, \emph{b} = $1.00$, \emph{c} = $3.30$, \emph{d} = $1.20$ and \emph{e} = $0.60$. So, \emph{$e$} is not frequent length 1 pattern. Hence, it is guaranteed that no item set containing \emph{e} will be frequent, due to the downward closure property of frequent item set. So we remove the node \emph{e} and get the new mining tree Figure-\ref{figure:E_COND_TREE_HEADER_TABLE} and its header table. Here we find all one item sets that are frequent, i.e., \emph{\{a\}, \{b\}, \{c\} \{d\}}. Now we will construct conditional tree for the found frequent 1-item and mine the conditional tree for it. However, items having total \emph{U\textsuperscript{cap}} less than \emph{minimum support} is not considered to construct conditional tree because this \emph{U\textsuperscript{cap}} value has been taken as the upper bound. So total \emph{U\textsuperscript{cap}} value less than \emph{minimum support} indicates that item must not be exist in the $2$ or more length frequent item set. So we do not construct conditional tree for these items.
+% figure:FALSE_NEGATIVE figure:E_COND_TREE_HEADER_TABLE
+We construct conditional trees from items having lowest total \emph{U\textsuperscript{cap}} value greater than \emph{minimum support}. As \emph{b} having total \emph{U\textsuperscript{cap}}, that is, $.69$, \emph{b} is skipped. Then the next candidate is \emph{d}. From header table pointer, we find that there is only one path for item \emph{d} exists in the mining tree (shown in Figure-\ref{figure:E_COND_TREE_HEADER_TABLE}), that is, \{\emph{a, c, d}\}:$1.08$. So we create conditional tree and update all nodes for mining probability with \emph{d's} \emph{U\textsuperscript{cap}} $1.08$. For this conditional tree, (Figure-\ref{figure:E_COND_TREE_HEADER_TABLE}) the header tables says all the nodes in the tree are having \emph{U\textsuperscript{cap}} greater than \emph{minimum support}, that is, $.9$. So, all the items are ready to be constructed as conditional tree. Since only one branch is found, we do not further construct conditional tree and take all the combinations as frequent items (Figure-\ref{figure:E_COND_TREE_HEADER_TABLE}. So we find \emph{\{dc\}, \{da\}, \{dca\}} as frequent pattern. 
 
-We construct conditional tree from items having lowest total \emph{U\textsuperscript{cap}} value greater than \emph{minimum support}. As \emph{b} having total \emph{U\textsuperscript{cap}} is $.69$ \emph{b}, is ignored for constructing conditional tree. Then the next candidate is \emph{d}. From header table pointer we find that there is only one path item \emph{d} exists in the mining tree Figure-\ref{figure:min_ready}. That is \{\emph{a, c, d}\}:$1.08$. So we create conditional tree and update all nodes mining probability with \emph{d's} \emph{U\textsuperscript{cap}} $1.08$. For this conditional tree Figure-\ref{figure:d_cond} the header tables says all the nodes in the tree are having \emph{U\textsuperscript{cap}} greater than \emph{minimum support} $.9$. So, all the items are ready to be constructed as conditional tree. As here is only one branch so we do not further construct conditional tree and take all the combinations as frequent items Figure-\ref{figure:d_cond} Table. So we find \emph{\{dc\}, \{da\}, \{dca\}} as frequent pattern. Next we create conditional tree for \emph{c}. Here c exists in the tree for three path those are \emph{\{a, c\} : $0.72$ , \{a , b, c\} : $.027$ and \{b, c\} : $0.27$}. So we create conditional tree (Figure-\ref{figure:c_cond}). Total mining value of \emph{c} is the sum of item caps in each respective path of \emph{c}. From the header we see that \emph{b} has total cap having less than \emph{minimum support} so we remove \emph{b} and create two item set \emph{\{ca\}}. Next we construct \emph{ca} conditional tree that contains only root (\emph{\{\}}). So no further tree is needed to be constructed and minned. Than we create conditional tree for \emph{a}. And find only root \emph{\{\}}. Thus we get all the frequent patterns. All the patterns are \emph{\{a\}, \{b\}, \{c\} \{d\}, \{dc\}, \{da\}, \{dca\} and \{ca\}}. As we have found all patterns from upper bound, so that it is guaranteed that there will be no false negative. But some false positive can be exists in the found frequent item set as there may be some value less than max value we assumed. So in the next section we will show an approach that eliminates the all false positives (if exists) in the data set.
-    \input{example/sim_min}
-    \input{example/sim_min_d_cond}
+Next we create conditional tree for \emph{c}. Here $c$ exists in the tree for three paths those are \emph{\{a, c\} : $0.72$ , \{a , b, c\} : $.027$ and \{b, c\} : $0.27$}. So we create conditional tree (Figure-\ref{figure:E_COND_TREE_HEADER_TABLE}). Total mining value of \emph{c} is the sum of item caps in each respective path of \emph{c}. From the header, we see that \emph{b} has total cap having less than \emph{minimum support}, so we remove \emph{b} and create two length item set \emph{\{ca\}}. Next, we construct \emph{ca} conditional tree that contains only root (\emph{\{\}}). So no further tree is needed to be constructed and mined. Than we create conditional tree for \emph{a}. We find only root \emph{\{\}} as prefix. This way, we get all the frequent patterns, i.e. \emph{\{a\}, \{b\}, \{c\} \{d\}, \{dc\}, \{da\}, \{dca\} and \{ca\}}. As we have found all patterns from the upper bound, it is guaranteed that there will be no false negatives. However, some false positives may exist in the found frequent item set as there may be some value less than maximum value we assumed. Then we go for false positive elimination.
+
+\begin{figure*}[t]
+    \begin{minipage}{0.5\linewidth}
+        \centering
+
+  		\input{result/t10/g_t10_const_batch}
+  		\caption{Batch Size vs Runtime for T40I10D100K ~\cite{dataset} Dataset }
+  		\label{result:g_t10_const_batch}
+    \end{minipage}%
+    \begin{minipage}{0.5\linewidth}
+         \centering
+  		 \input{result/t10/g_t10_const_win}
+  		 \caption{Window Size vs Runtime for T40I10D100K ~\cite{dataset} Dataset }
+  		 \label{result:g_t10_const_win}
+    \end{minipage}
+\end{figure*}
+
+\begin{figure*}[t]
+\begin{minipage}{0.5\linewidth}
+    \centering
+    \input{result/mushroom/g_m_total}
+    \caption{Runtime vs Minimum Support(\%) for Mushroom ~\cite{dataset} Dataset }
+    \label{result:g_m_total}
+\end{minipage}%
+    \begin{minipage}{0.5\linewidth}
+    \centering
+    \input{result/t10/g_t10_total}
+    \caption{Runtime vs Minimum Support(\%) for T40I10D100K ~\cite{dataset} Dataset }
+    \label{result:g_t10_total}
+    \end{minipage}
+\end{figure*} 
+
 \subsubsection{False positive reduction}
-    False positives are such patterns those are exist in the frequent pattern list but not actually frequent. False negatives are such patterns those does not exist in the frequent pattern list but actually frequent. As our whole process of \emph{U\textsuperscript{cap}} assignment, construction of \emph{US-tree} and \emph{USFP-growth} mining algorithm, all are process are based on taking upper value of two item set supports, our process may create some false positives but no false negatives. In this section we will discuss about finding and eliminating all the false positives from found patterns from \emph{USFP-growth} mining result. For this elimination process we just use two scans of transactions. In the first scan we eliminate the infrequent one item set. In the second scan we update \emph{frequent tree} exact support that makes easily to find infrequent items if exists in our frequent item found. The process is given below.
+    To recall, false positives are such patterns those exist in the frequent pattern list but not actually frequent. False negatives are such patterns those do not exist in the frequent pattern list but actually frequent. In our approach, the process of \emph{U\textsuperscript{cap}} assignment, construction of \emph{US-tree} and \emph{USFP-growth} mining, all are based on taking upper value of two item set supports, this may generate some false positives but no false negatives. In this section, we will discuss about finding and eliminating all the false positives from generated patterns by \emph{USFP-growth} mining. For this elimination process, we just use two scans of transactions. In the first scan we eliminate the infrequent one item set and in the second scan, we update \emph{frequent tree} exact support that finds infrequent items if exists in our frequent found items. The process is given below. 
 
-In the previous sections we described about tree construction and mining approach. Mining transaction table-\ref{table:transaction_batch} we found \emph{\{a\}, \{b\}, \{c\} \{d\}, \{dc\}, \{da\}, \{dca\}} and \emph{\{ca\}} as frequent patterns. From the patterns we first construct a pattern tree from the patterns. This tree is very much easier to construct. For tree construction we first create root node \emph{\{\}}. Then take each frequent item and insert into the root node as a child. for \emph{a}, \emph{b}, \emph{c}, \emph{d} we just insert as child as it does not exists in the tree. For \emph{dc} do not create new node for \emph{d} but create a new node \emph{c} as child of \emph{d} as there is no \emph{c} exists in the child of \emph{d}. Thus we construct the whole frequent pattern tree for further identification of infrequent patterns.
+Mining on Table-\ref{table:prefix_assigned} generates \emph{\{a\}, \{b\}, \{c\} \{d\}, \{dc\}, \{da\}, \{dca\}} and \emph{\{ca\}} as frequent patterns. We need to construct a pattern tree from the patterns using the similar approach of constructing FP-tree in FP-growth algorithm.
 
-Next, in the first scan of inserted transactions, we remove one item infrequent all items from transactions. Figure-\ref{figure:frequent_patterns_final} table shows the transaction table after eliminating all nodes accepts one item frequent. As for one item frequent checking we did not take any upper bound limit we get exact one item frequent patterns. From our \emph{Frequent Item Tree} all the children of \emph{root \{\}} are frequent and there is no false positive. So we can get \emph{\{a\}, \{b\}, \{c\} \{d\}} one item frequent set and without these all other items are infrequent.  Then in the second scan we take each transaction and update each nodes support. In the tree we update value with the equation-\ref{equation:exp_sup}. After scanning second time our \emph{Frequent Item Tree} becomes full fill with all information to find infrequent exists in our patterns. For this we need to traverse the \emph{Frequent Item Tree}. As the tree contains all nodes with its own support we get the true infrequent. For example, for \emph{\{d, a\}} path \emph{a : 0.89} as the actual support for {da : 0.89} pattern. We find this in frequent, so we can easily eliminate. Figure-\ref{figure:frequent_patterns_final} shows the identifying all the frequent item set infrequent. So we can eliminate all the false positives.    And find the exact frequent patterns. From the tree we find the patterns \emph{\{a\}, \{b\}, \{c\} \{d\} and \{dc\}}.
-    \input{example/frequent_items}
+%Mining on Table-\ref{table:prefix_assigned} generates \emph{\{a\}, \{b\}, \{c\} \{d\}, \{dc\}, \{da\}, \{dca\}} and \emph{\{ca\}} as frequent patterns. We need to construct a pattern tree from the patterns. For tree construction we first create root node \emph{\{\}}. Then take each frequent item and insert into the root node as a child. for \emph{a}, \emph{b}, \emph{c} and \emph{d} we just insert them as child of root node, since these do not exists in the tree. For \emph{dc}, no need to create new node for \emph{d} but create a new node \emph{c} as child of \emph{d} as there is no \emph{c} exists in the child of \emph{d}. Thus we construct the whole frequent pattern tree for further identification of infrequent patterns.
 
+Next, in the first scan of inserted transactions, we remove all one length infrequent items from transactions. Figure-\ref{figure:FALSE_NEGATIVE} shows the transaction table after eliminating all nodes except one length frequent items. Since, for one length items, checking whether they are frequent, requires no upper bound limit and we get exact one length frequent patterns. From our \emph{Frequent Item Tree}, all the children of \emph{root \{\}} are frequent and there are no false positives, i.e., \emph{\{a\}, \{b\}, \{c\} \{d\}}. All other items are infrequent. Then in the second scan we take each transaction and update each nodes support. In the tree, we update value with the equation-\ref{equation:cap}. At the second scan, \emph{Frequent Item Tree} becomes complete with all information to find infrequent items in generated patterns. Now, we need to traverse the \emph{Frequent Item Tree}. As the tree contains all nodes with its own support we get the true infrequent. For example, for the path \emph{\{d, a\}}, \emph{a : 0.89} contains the actual support for the pattern {da : 0.89}. We find this in frequent, so we can easily eliminate this. Figure-\ref{figure:FALSE_NEGATIVE} depicts the infrequent patterns within frequent patterns. Therefore, we can eliminate all the false positives and find the exact frequent patterns. From the tree we find the patterns \emph{\{a\}, \{b\}, \{c\} \{d\} and \{dc\}} as exactly frequent.
 
+%    \input{example/frequent_items}
+\begin{figure*}[t]
+\begin{minipage}{0.5\linewidth}
+    \centering
+    \input{result/chess/g_chess_total}
+    \caption{Runtime vs Minimum Support(\%) for Chess ~\cite{dataset} Dataset }
+    \label{result:g_chess_total}
+\end{minipage}%
+\begin{minipage}{0.5\linewidth}
+   \centering
+   \input{result/kosarak/g_k_total}
+   \caption{Runtime vs Minimum Support(\%) for Kosarak ~\cite{dataset} Dataset }
+   \label{result:g_k_total}
+    \end{minipage}
+\end{figure*} 	
 
+\begin{figure*}[t]
+\begin{minipage}{0.5\linewidth}
+    \centering
+    \input{result/t10/g_t10_memory_node}
+    \caption{Total Memory vs Total Transaction (in thousand) for T40I10D100K ~\cite{dataset} Dataset }
+    \label{result:g_t10_memory_node}
+\end{minipage}%
+\begin{minipage}{0.5\linewidth}
+   \centering
+   \input{result/kosarak/g_k_memory_node}
+   \caption{Total Memory vs Total Transaction (in thousand) for Kosarak ~\cite{dataset} Dataset }
+   \label{result:g_k_memory_node}
+    \end{minipage}
+\end{figure*}
 
+\section{Experimental Results}\label{Experiment}
+We have performed a number of simulations in our experiment on both synthetic database and real-world database. The data are taken from dataset repository ~\cite{dataset}. Performance tests from our experiment show that \emph{US-tree} tree construction technique and \emph{USFP-growth} mining algorithm can run on any uncertain stream database with any support threshold, window size, and batch size. Our experimental result shows that these techniques are much faster and scalable frequent pattern mining technique. We have tried to compare in all aspects to prove our approach's scalability, run-time efficiency and memory efficiency.  
 
-\section{Experimental Results}
+For experimentation, we collected data from dataset repository ~\cite{dataset} which contain precise (certain) data. Then we have used our own probabilistic tool and technique to generate the existential probability of each item of the each transaction of the database. Real life data set actually follows gaussian distribution that is normal distribution. It actually says that in real world extreme cases are minimum and average cases are maximum. We have used \emph{Java pseudo random} to generate the existential probability for each item of all the transaction of the database with gaussian distribution. By assigning these probability value to each item, we have generated the uncertain database for both real life database and synthetic database. 
 
+However, one can give existential probability by any distribution according to need. We have set several parameters for the evaluation like batch size vs running time, window size vs running time, transactions in a window vs false positive count for correctness; tree construction time per window and total database vs minimum support, mining time per window and total database vs minimum support, total time to complete per window and total database vs minimum support, total tree node in tree per window vs minimum support, total memory needed by mining process vs minimum support for comparison with existing approaches.
 
+For the extensive experimental analysis, we have chosen the mushroom, chess and T40I10D100K datasets. The reason we have chosen these two datasets is, the mushroom  is real life dataset and dense dataset whereas T40I10D100K  is synthetic and sparse dataset generated by a generator from the IBM Almaden Quest.
+\subsection{Performance Analysis}
 
-
-
-
-
-We have performed a number of simulations in our experiment on both synthetic database and real-world database. The data are taken from dataset repository ~\cite{dataset}. Our experiment shows that \emph{US-tree} (Uncertain Stream tree) is very much compact. This tree construction technique can make the items share one single node. This compactness of \emph{US-tree} surprisingly helps the mining, \emph{USFP-growth} (Uncertain Stream Frequent Pattern growth) process to gain a lot in run-time and memory. Pattern tree can be used to find max pattern and closed pattern. Performance tests from our experiment show that \emph{US-tree} tree construction technique and \emph{USFP-growth} mining algorithm can run on any uncertain stream database with any support threshold, window size, and batch size. Our experimental result shows that these techniques are much faster and scalable frequent pattern mining technique. As we have proposed a new approach for finding frequent patterns over uncertain data we have compared performance with itself for comparing correctness of our approach. Then we have compared with \emph{SUF-growth}. We have tried to compare in all aspects to prove our approach's correctness, run-time efficiency, and memory efficiency. We have collected the real-life and synthetic datasets from the frequent item-set mining repository ~\cite{dataset}, those were collected for certain databases. Then we have used our own probabilistic tool and technique to generate the existential probability of each item of the each transaction of the database. Real life data set actually follows gaussian distribution that is normal distribution. It actually says that in real world extreme cases are minimum and average cases are maximum. We have used \emph{Java pseudo random} generate the existential probability for each item of all the transaction of the database with gaussian distribution. By assigning these probability value to each item, we have generated the uncertain database for both real life database and synthetic database found from dataset repository ~\cite{dataset}. However, one can give existential probability by any distribution according to need. We have set several properties for this evaluation from experimental result. Batch size vs running time, window size vs running time, transactions in a window vs false positive count for correctness; tree construction time per window and total database vs minimum support, mining time per window and total database vs minimum support, total time to complete per window and total database vs minimum support, total tree node in tree per window vs minimum support, total memory needed by mining process vs minimum support for comparison with existing approaches.
-
-In this section, we have provided experiment analysis. In the experiment, we have focused on (1) correctness of our proposed algorithm and (2) the comparison with existing algorithm SUF-growth ~\cite{suf_growth}. For the extensive experiment, we have chosen the mushroom dataset  and T40I10D100K database. The reason we have chosen these two datasets is, the mushroom  is real life dataset and dense dataset whereas T40I10D100K  is synthetic and sparse dataset generated by a generator from the IBM Almaden Quest. Table \ref{table:dataset} shows the details the properties for dataset . Later we have also taken chess  for comparison with the algorithm. The experimental results have been given in the following subsections.
-\subsection{Algorithm Performance Analysis}
-
-\paragraph{Total Database Size Change Effect}Our experiment shows clearly that our proposed tree construction algorithm \emph{US-tree}, tree mining algorithm \emph{USFP-growth} works nicely with any size of window, batch or transaction size. For the different size of the database (transaction count in a tree), this algorithm works extensively. Figure-\ref{result:g_m_const_tran} shows the total runtime (includes tree construction, mining, and false positive reduction) change with the growth of the size of the mushroom dataset. Figure-\ref{result:g_t10_const_tran} the same characteristic for T40I10D100K dataset. Figure-\ref{result:g_m_const_tran_mem} and figure-\ref{result:g_t10_const_tran_mem} shows the total nodes change in a tree while the size of database grows for databases corresponding to mushroom and T40I10D100K database. The growth of the graphs is very much regular. From these graphs, it is clearly visible that, with the growth of total transaction the time increases and this certainly proves the scalability of our algorithm. 
-
-        \begin{figure}[h]
-        \centering
-            \input{result/mushroom/g_m_const_tran}
-        \caption{Size of Database vs Runtime for Mushroom ~\cite{dataset} Dataset }
-        \label{result:g_m_const_tran}
-        \end{figure}
-        \begin{figure}[h]
-        \centering
-            \input{result/t10/g_t10_const_tran}
-        \caption{Size of Database vs Runtime for T40I10D100K ~\cite{dataset} Dataset }
-        \label{result:g_t10_const_tran}
-        \end{figure}
-    
-    \begin{table}[h]
-        \centering
-        \begin{tabular}{|c|c|}
-        \hline 
-       Size of Database        &    Memory (in MB)\\    \hline\hline
+\paragraph{Window Size Change Effect}For window size change effect we have assessed our algorithm in the different angle. The experiment shows that the varying window size doesn't affects the performance and it is consistent w.r.t. runtime (including tree construction, mining, and false positive reduction). Figure \ref{result:g_t10_const_batch} shows the effect of different window size for T40I10D100K dataset on runtime.
+                
+\paragraph{Batch Size Change Effect}We have also tested the performance of our algorithm by changing the batch size. For varying batch size in different volume, the result was consistent. For constant window and variable batches we have simulated our proposed algorithms. Figure-\ref{result:g_t10_const_win} shows effect of batch size change effect on T40I10D100K dataset. 
         
-        1000&0.473\\\hline
-        2000&0.795\\\hline
-        3000&1.135\\\hline
-        4000&1.442\\\hline
-        5000&1.762\\\hline
-    
-            \end{tabular}
-        \caption{ Total Memory (in MB) in Tree for Mushroom ~\cite{dataset} Dataset}
-        \label{result:g_m_const_tran_mem}
-        \end{table}
-    
-    \begin{table}[h]
-        \centering
-        \begin{tabular}{|c|c|}
-        \hline 
-       Size of Database       &    Memory (in MB)\\    \hline\hline
-        
-        8000 &23.504\\\hline
-        10000&46.736\\\hline
-        24000&69.861\\\hline
-        32000&92.903\\\hline
-        40000&115.888\\\hline
-    
-            \end{tabular}
-        \caption{ Total Memory (in MB) in Tree for T40I10D100K ~\cite{dataset} Dataset}
-        \label{result:g_t10_const_tran_mem}
-        \end{table}
-
-\paragraph{Window Size Change Effect}For window size change effect we have experimented our algorithm in the different angle. The experiment shows the window size change effect do not hamper performance and it is consistent. Figure-\ref{result:g_m_const_batch} and figure-\ref{result:g_t10_const_batch} shows effect of window size change effect on mushroom and T40I10D100K dataset.
-
-        \begin{figure}[h]
-        \centering
-            \input{result/mushroom/g_m_const_batch}
-        \caption{Batch Size vs Runtime for Mushroom ~\cite{dataset} Dataset }
-        \label{result:g_m_const_batch}
-        \end{figure}
-        \begin{figure}[h]
-        \centering
-            \input{result/t10/g_t10_const_batch}
-        \caption{Batch Size vs Runtime for T40I10D100K ~\cite{dataset} Dataset }
-        \label{result:g_t10_const_batch}
-        \end{figure}
-        % \begin{figure}[h]
-        % \centering
-        %     \input{result/t10/g_t10_const_batch}
-        % \caption{Batch Size vs Runtime for T40I10D100K Dataset }
-        % \label{result:g_t10_const_batch}
-        % \end{figure}
-         
-\paragraph{Batch Size Change Effect}Like batch change effect we also experimented for batch size change effect.For changing batch size in different volume the result we find is consistent. For constant window and variable batches we have simulated our proposed algorithms. Figure-\ref{result:g_m_const_batch} and figure-\ref{result:g_t10_const_batch} shows effect of batch size change effect on mushroom and T40I10D100K dataset.
-        \begin{figure}[h]
-        \centering
-            \input{result/mushroom/g_m_const_win}
-        \caption{Window Size vs Runtime for Mushroom ~\cite{dataset} Dataset }
-        \label{result:g_m_const_win}
-        \end{figure}
-        \begin{figure}[h]
-        \centering
-            \input{result/t10/g_t10_const_win}
-        \caption{Window Size vs Runtime for T40I10D100K ~\cite{dataset} Dataset }
-        \label{result:g_t10_const_win}
-        \end{figure}
-        
-\subsection{Comparison With Existing Approaches}
-Here now we have compared our proposed approach with existing system. We have choose SUF-growth ~\cite{suf_growth}  for comparison. This algorithm is perfectly fit for uncertain stream data mining. UF-streaming also designed for mining frequent patterns from uncertain stream but in ~\cite{suf_growth} it has been proved that in all criteria (runtime, memory and correctness) SUF-growth ~\cite{suf_growth} is better than UF-streaming ~\cite{suf_growth}. We have experimented for both runtime performance and memory efficiency. The result has described below:
-
+\subsection{Performance Comparison With Existing Approaches}
+In this section, we have compared our proposed approach with existing algorithm. We have chosen SUF-growth ~\cite{DBLP:conf/icde/LeungH09} (most recent, latest state-of-the-arts algorithm) for comparison. This fits perfectly for uncertain stream data mining. UF-streaming also designed for mining frequent patterns from uncertain stream but in ~\cite{DBLP:conf/icde/LeungH09} it has been proved that in all criteria (runtime, memory and correctness) SUF-growth ~\cite{DBLP:conf/icde/LeungH09} is better than UF-streaming ~\cite{DBLP:conf/icde/LeungH09}.
+            
 \subsubsection{Runtime Comparison}
-    Runtime comparison has been experimented and the in the result we found is consistent and we have gained runtime efficiency for both dense and sparse dataset. For mushroom dataset our approach's total tree construction time , total mining time and total time has been compared with SUF-growth ~\cite{suf_growth}'s tree construction time and mining time and total time. Figure-\ref{result:g_m_tree_construction_total}, figure-\ref{result:g_m_mining_total} and figure-\ref{result:g_m_total} shows the result graph. As mushroom is a dense database we gain much more in run time. For dense characteristic the constructed \emph{US-tree} is very much compact and moreover when mining compact tree the mining time surprisingly decreases that affect the total time. Figure-\ref{result:g_t10_tree_construction_total}, figure-\ref{result:g_t10_mining_total} and figure-\ref{result:g_t10_total} shows same comparison for T40I10D100K dataset . The graphs shows that our algorithm works correctly for sparse dataset too. Figure-\ref{result:g_chess_tree_construction_total}, figure-\ref{result:g_chess_mining_total} and figure-\ref{result:g_chess_total} shows tree construction time, mining time and total time for chess dataset. Kosarak is very large and real-life data set. This is web click database. This database is sparse and very much large. \ref{result:g_k_tree_construction_total}, figure-\ref{result:g_k_mining_total} and figure-\ref{result:g_k_total} shows the effect of changing minimum support effect corresponding to tree construction time, mining time and total time. This one is dense dataset and the result is consistent, efficient and also scalable.
-            \begin{figure}[h]
-            \centering
-                \input{result/mushroom/g_m_tree_construction_total}
-            \caption{Total Tree Construction Time vs Minimum Support(\%) for Mushroom ~\cite{dataset} Dataset }
-            \label{result:g_m_tree_construction_total}
-            \end{figure}
-            
-            \begin{figure}[h]
-            \centering
-                \input{result/mushroom/g_m_mining_total}
-            \caption{Total Tree Mining Time vs Minimum Support(\%) for Mushroom ~\cite{dataset} Dataset }
-            \label{result:g_m_mining_total}
-            \end{figure}
-            \begin{figure}[h]
-            \centering
-                \input{result/mushroom/g_m_total}
-            \caption{Runtime vs Minimum Support(\%) for Mushroom ~\cite{dataset} Dataset }
-            \label{result:g_m_total}
-            \end{figure}
-            \begin{figure}[h]
-            \centering
-                \input{result/t10/g_t10_tree_construction_total}
-            \caption{Total Tree Construction Time vs Minimum Support(\%) for T40I10D100K ~\cite{dataset} Dataset }
-            \label{result:g_t10_tree_construction_total}
-            \end{figure}
-            
-            \begin{figure}[h]
-            \centering
-                \input{result/t10/g_t10_mining_total}
-            \caption{Total Tree Mining Time vs Minimum Support(\%) for T40I10D100K ~\cite{dataset} Dataset }
-            \label{result:g_t10_mining_total}
-            \end{figure}
-            
-            \begin{figure}[h]
-            \centering
-                \input{result/t10/g_t10_total}
-            \caption{Runtime vs Minimum Support(\%) for T40I10D100K ~\cite{dataset} Dataset }
-            \label{result:g_t10_total}
-            \end{figure}
-    
-            \begin{figure}[h]
-            \centering
-                \input{result/chess/g_chess_tree_construction_total}
-            \caption{Total Tree Construction Time vs Minimum Support(\%) for Chess ~\cite{dataset} Dataset }
-            \label{result:g_chess_tree_construction_total}
-            \end{figure}
-            
-            \begin{figure}[h]
-            \centering
-                \input{result/chess/g_chess_mining_total}
-            \caption{Total Tree Mining Time vs Minimum Support(\%) for Chess ~\cite{dataset} Dataset }
-            \label{result:g_chess_mining_total}
-            \end{figure}
-            
-            \begin{figure}[h]
-            \centering
-                \input{result/chess/g_chess_total}
-            \caption{Runtime vs Minimum Support(\%) for Chess ~\cite{dataset} Dataset }
-            \label{result:g_chess_total}
-            \end{figure}
-            \begin{figure}[h]
-            \centering
-                \input{result/kosarak/g_k_tree_construction_total}
-            \caption{Total Tree Construction Time vs Minimum Support(\%) for Kosarak ~\cite{dataset} Dataset }
-            \label{result:g_k_tree_construction_total}
-            \end{figure}
-            
-            \begin{figure}[h]
-            \centering
-                \input{result/kosarak/g_k_mining_total}
-            \caption{Total Tree Mining Time vs Minimum Support(\%) for Kosarak ~\cite{dataset} Dataset }
-            \label{result:g_k_mining_total}
-            \end{figure}
-
-            \begin{figure}[h]
-            \centering
-                \input{result/kosarak/g_k_total}
-            \caption{Runtime vs Minimum Support(\%) for Kosarak ~\cite{dataset} Dataset }
-            \label{result:g_k_total}
-            \end{figure}
-            
+Our proposed approach has been assessed based on runtime against existing algorithm using both dense and sparse datasets. For mushroom dataset, total processing and running time of proposed algorithm have been compared with SUF-growth ~\cite{DBLP:conf/icde/LeungH09} algorithm running time. Figure-\ref{result:g_m_total} shows the result graph. As mushroom is a dense database we noticed significant gain. For dense characteristics, the constructed \emph{US-tree} is very much compact and moreover when mining compact tree, the mining time surprisingly decreases that affect the total time. Figure-\ref{result:g_t10_total} shows same comparison for T40I10D100K dataset. The graphs show that our algorithm works correctly for sparse dataset too. Figure-\ref{result:g_chess_total} shows running time for chess dataset. Kosarak is very large and real-life web-click data set. This database is sparse and very much large. Figure-\ref{result:g_k_total} shows the superiority of our proposed algorithm w.r.t. running time for varying thresholds.
+       
 \subsubsection{Memory Comparison}
-As our proposed \emph{US-tree} have the capability to share nodes more than \emph{SUF-growth}, we get much more gain in memory. The experimental result also indicates that very clearly. Figure-\ref{result:g_m_memory_node} shows the memory comparison on mushroom dataset. Mushroom is the dense database so we get  much more gain in memory. The graph clearly shows that with the increase of total transaction in the tree gives the much more gain. For chess dataset the compactness of tree is also very impressive as this dataset is also compact (figure-\ref{result:g_chess_memory_node}) the Dense dataset have more scope to share nodes more. Figure-\ref{result:g_t10_memory_node} also shows that in T40I10D100K database we also gain the memory optimization. Figure-\ref{result:g_k_memory_node} shows memory comparison between \emph{USFP-growth} vs \emph{SUF-growth} ~\cite{suf_growth}. On this sparse database it has been clearly shown that, lot of memory optimization has been possible with our proposed algorithm. As the database is sparse, we get the memory gain less then dense one.
-            \begin{figure}[h]
-            \centering
-                \input{result/mushroom/g_m_memory_node}
-            \caption{Total Memory vs Total Transaction (in thousand) for Mushroom ~\cite{dataset} Dataset }
-            \label{result:g_m_memory_node}
-            \end{figure}
-            
-            \begin{figure}[h]
-            \centering
-                \input{result/chess/g_chess_memory_node}
-            \caption{Total Memory vs Total Transaction (in thousand) for Chess ~\cite{dataset} Dataset }
-            \label{result:g_chess_memory_node}
-            \end{figure}
-            
-            \begin{figure}[h]
-                \input{result/t10/g_t10_memory_node}
-            \caption{Total Memory vs Total Transaction (in thousand) for T40I10D100K ~\cite{dataset} Dataset }
-            \label{result:g_t10_memory_node}
-            \end{figure}
-        
-            \begin{figure}[h]
-            \centering
-                \input{result/kosarak/g_k_memory_node}
-            \caption{Total Memory vs Total Transaction (in thousand) for Kosarak ~\cite{dataset} Dataset }
-            \label{result:g_k_memory_node}
-            \end{figure}
+As our proposed \emph{US-tree} have the capability to share nodes more than \emph{SUF-growth}, we get much more gain in memory. The experimental result comply the fact. Figure-\ref{result:g_t10_memory_node} and Figure \ref{result:g_k_memory_node} show the memory comparison on T40I10D100K and Kosarak datasets. The graph clearly shows that with the increase of total transaction in the tree gives the much more gain. On these sparse databases, it has been clearly shown that lot of memory optimization has been possible with our proposed algorithm. As the database is sparse, we get the memory gain less than dense one.
 
-In summary, our proposed \emph{US-tree}, construction \emph{USFP-growth} mining approach is correct, efficient, the scalable, works fine in any configuration (minimum support, window size, batch size). For dense dataset (both real and synthetic) our approach is very efficient. For sparse dataset, this also gives us gain both in memory and running time. The \emph{U\textsuperscript{cap}} value gives much more benefit to share nodes in the \emph{US-tree}. The compactness of \emph{US-tree} is noticeable. Mining compact \emph{US-tree} gives the main surprise in the running time. The \emph{USFP-growth} mining algorithm works nicely without generating no false negatives and a little amount of false positives that can efficiently be removed using the false positive reduction technique.
+In summary, our proposed \emph{US-tree} construction \emph{USFP-growth} mining approach is correct, efficient, scalable and works fine in any configuration (minimum support, window size, batch size). For dense dataset (both real and synthetic) our approach is very efficient. For sparse dataset, this also gives us gain both in memory and running time. The \emph{U\textsuperscript{cap}} value gives much more benefit to share nodes in the \emph{US-tree}. The compactness of \emph{US-tree} is noticeable. Mining compact \emph{US-tree} gives the main surprise in the running time. The \emph{USFP-growth} mining algorithm works nicely without generating any false negatives and a little amount of false positives that can efficiently be removed using the false positive reduction technique.
 
-\section{Conclusion}
-In this paper, we have proposed new sliding window based probabilistic strategy for finding frequent patterns from uncertain dynamic data. We have proposed \emph{U\textsuperscript{cap}}, which is the upper bound of existential probability. We have proposed new \emph{US-tree} data-structure that is very compact. For mining, we have introduced \emph{USFP-growth} algorithm that will efficiently and recursively mine frequent patterns from \emph{US-tree}.
-For calculating \emph{U\textsuperscript{cap}} value, we have taken upper-bound of existential probability that makes the node sharing possible between same items. For uncertainty property of data, node sharing was very much irregular in existing approaches. In our strategy, node sharing is possible more frequently and this makes the tree more compact and efficient. Our proposed \emph{US-tree} is very compact for possible node sharing much more than existing tree structures (e.g. \emph{SUF-growth} ~\cite{suf_growth}). To handle the stream of data we have proposed to divide the whole transactions into batches and windows that is completely dependent on the system user how much recent data she/he wants to store in the tree. Instead of keeping the support we have kept new meta-information based on \emph{U\textsuperscript{cap}} value that helps further mining. We have developed new algorithm \emph{USFP-growth} mining algorithm that efficiently remove unnecessary patterns from the tree earlier, which helps to improve runtime time efficiency. Conditional candidate tree needed to be mined in our approach, will be less than other approaches. This makes the mining algorithm faster. We have also introduced an efficient strategy to remove the false positives generated by our algorithm. Our comprehensive result study shows that total time (tree construction, tree mining, and false positive reduction) is less than existing approaches (e.g. \emph{SUF-growth} ~\cite{suf_growth}). We also developed a frequent pattern tree which may later be used to mine closed patterns and maximal patterns.
-As the frequent pattern mining over the domain of uncertain stream data is a very new, there are some scopes to extend and use our proposed approach as a tool for further research.
-\textbf{Firstly,} we have introduced probabilistic model for calculating \emph{U\textsuperscript{cap}} value. This value can be studied and updated to find both upper and lower bound of existential probability.
-\textbf{Secondly,} as data-set we have worked on is the stream data, which is dynamic, can be changed dynamically with time. Once an item comes to the top of the \emph{US-tree} stays there at least it becomes oldest data although may be very much infrequent in the recent data. This case may make the tree not compact that was possible. As data stream cannot be read more than once. So no previously assumption can be done to the tree. So some re-construction after new batch inserted into the window will possibly be the one of the major optimization of the tree.
-
+\section{Conclusions}\label{Conclusion}
+In this paper, we have proposed new sliding window based probabilistic strategy for finding frequent patterns from uncertain dynamic data. The strategy comprises of a new upper bound of existential probability, \emph{U\textsuperscript{cap}}, a new compact data-structure, \emph{US-tree} and an efficient algorithm \emph{USFP-growth} that recursively mine frequent patterns from \emph{US-tree}. For calculating \emph{U\textsuperscript{cap}} value, we have taken upper-bound of existential probability that makes the node sharing possible between same items. For uncertainty property of data, node sharing was very much irregular in existing approaches. In our strategy, node sharing is possible more frequently and this makes the tree more compact and efficient. To handle the stream of data, we have segmented the whole transactions into batches and windows. Instead of keeping the support we have kept new meta-information based on \emph{U\textsuperscript{cap}} value that helps further mining. Our developed \emph{USFP-growth} mining algorithm efficiently removes unnecessary patterns from the tree earlier, which helps to improve runtime efficiency. We have also introduced an efficient strategy to remove the false positives generated by our algorithm. Our comprehensive experimental analyses proves the supremacy of proposed algorithm w.r.t. running time (efficiency), memory consumption (scalability). We also developed a frequent pattern tree which may later be used to mine closed patterns and maximal patterns.
 
 \bibliographystyle{IEEEtran}
 %\bibliography{mybib}
-\bibliography{Bibliography}
+\bibliography{small_bibliography}
 
 % that's all folks
 \end{document}
-
 

@@ -1,0 +1,51 @@
+%%%mark = star, diamond, square, otimes
+%\documentclass{article}
+%\usepackage{pgfplots}
+%\usepackage[justification=centering]{caption}
+%\pgfplotsset{compat=newest}
+%\begin{document}
+\begin{tikzpicture}
+\begin{axis}[
+    width=8.5cm,
+    height=5.5cm,
+    xlabel={Total Transaction (in thousands) },
+    ylabel={Total Memory (in MB) },
+    xmin=70, xmax=95,
+    ymin=90, ymax=150,
+    xtick={70,75,80,85,90,95},
+    ytick={90,105,120,135},
+    legend pos=north west,
+    ymajorgrids=true,
+    grid style={line width=.2pt,draw=gray!50},
+]
+ 
+\addplot[
+    solid, every mark/.append style={solid, fill=gray}, mark=square
+    ]
+    coordinates {
+			(70,106.996)
+			(75,114.591)
+			(80,122.197)
+			(85,129.773)
+			(90,137.375)
+			(95,144.979)
+
+	};
+    \addlegendentry{SUF-growth}
+\addplot[
+    solid, every mark/.append style={solid, fill=black}, mark=*
+    ]
+    coordinates {
+		(70,93.711  )
+		(75,100.889 )
+		(80,108.076 )
+		(85,115.233 )
+		(90,122.415 )
+		(95,129.591 )
+
+};
+    \addlegendentry{USFP-growth}
+ 
+\end{axis}
+\end{tikzpicture}
+%\end{document}
