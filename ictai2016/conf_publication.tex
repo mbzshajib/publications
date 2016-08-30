@@ -16,7 +16,7 @@
 \usepackage{todonotes}
 \usepackage[]{algorithm2e}
 \usepackage{pgfplots}
-\usepackage{caption}
+\usepackage[font={small,it}]{caption}
 \usepackage{url}
 \usepackage{pdfpages}
 
@@ -195,35 +195,32 @@ We construct conditional trees from items having lowest total \emph{U\textsupers
 Next we create conditional tree for \emph{c}. Here $c$ exists in the tree for three paths those are \emph{\{a, c\} : $0.72$ , \{a , b, c\} : $.027$ and \{b, c\} : $0.27$}. So we create conditional tree (Figure-\ref{figure:E_COND_TREE_HEADER_TABLE}). Total mining value of \emph{c} is the sum of item caps in each respective path of \emph{c}. From the header, we see that \emph{b} has total cap having less than \emph{minimum support}, so we remove \emph{b} and create two length item set \emph{\{ca\}}. Next, we construct \emph{ca} conditional tree that contains only root (\emph{\{\}}). So no further tree is needed to be constructed and mined. Than we create conditional tree for \emph{a}. We find only root \emph{\{\}} as prefix. This way, we get all the frequent patterns, i.e. \emph{\{a\}, \{b\}, \{c\} \{d\}, \{dc\}, \{da\}, \{dca\} and \{ca\}}. As we have found all patterns from the upper bound, it is guaranteed that there will be no false negatives. However, some false positives may exist in the found frequent item set as there may be some value less than maximum value we assumed. Then we go for false positive elimination.
 
 \begin{figure*}[t]
-    \begin{minipage}{0.5\linewidth}
+    \begin{minipage}{0.25\linewidth}
         \centering
-
-  		\input{result/t10/g_t10_const_batch}
-  		\caption{Batch Size vs Runtime for T40I10D100K ~\cite{dataset} Dataset }
+  		\includegraphics[width=\textwidth]{images/result/g_t10_const_batch}
+  		\caption{T40I10D100K Dataset }
   		\label{result:g_t10_const_batch}
-    \end{minipage}%
-    \begin{minipage}{0.5\linewidth}
+    \end{minipage}%	
+    \begin{minipage}{0.25\linewidth}
          \centering
-  		 \input{result/t10/g_t10_const_win}
-  		 \caption{Window Size vs Runtime for T40I10D100K ~\cite{dataset} Dataset }
+  		 \includegraphics[width=\textwidth]{images/result/g_t10_const_win}
+  		 \caption{ T40I10D100K Dataset }
   		 \label{result:g_t10_const_win}
-    \end{minipage}
+    \end{minipage}	
+	\begin{minipage}{0.25\linewidth}
+		\centering
+		\includegraphics[width=\textwidth]{images/result/g_m_total}
+		\caption{ Mushroom Dataset }
+		\label{result:g_m_total}
+	\end{minipage}%
+    \begin{minipage}{0.25\linewidth}
+		\centering
+		\includegraphics[width=\textwidth]{images/result/g_t10_total}
+		\caption{ T40I10D100K Dataset }
+		\label{result:g_t10_total}
+    \end{minipage}	
 \end{figure*}
 
-\begin{figure*}[t]
-\begin{minipage}{0.5\linewidth}
-    \centering
-    \input{result/mushroom/g_m_total}
-    \caption{Runtime vs Minimum Support(\%) for Mushroom ~\cite{dataset} Dataset }
-    \label{result:g_m_total}
-\end{minipage}%
-    \begin{minipage}{0.5\linewidth}
-    \centering
-    \input{result/t10/g_t10_total}
-    \caption{Runtime vs Minimum Support(\%) for T40I10D100K ~\cite{dataset} Dataset }
-    \label{result:g_t10_total}
-    \end{minipage}
-\end{figure*} 
 
 \subsubsection{False positive reduction}
     To recall, false positives are such patterns those exist in the frequent pattern list but not actually frequent. False negatives are such patterns those do not exist in the frequent pattern list but actually frequent. In our approach, the process of \emph{U\textsuperscript{cap}} assignment, construction of \emph{US-tree} and \emph{USFP-growth} mining, all are based on taking upper value of two item set supports, this may generate some false positives but no false negatives. In this section, we will discuss about finding and eliminating all the false positives from generated patterns by \emph{USFP-growth} mining. For this elimination process, we just use two scans of transactions. In the first scan we eliminate the infrequent one item set and in the second scan, we update \emph{frequent tree} exact support that finds infrequent items if exists in our frequent found items. The process is given below. 
@@ -236,31 +233,28 @@ Next, in the first scan of inserted transactions, we remove all one length infre
 
 %    \input{example/frequent_items}
 \begin{figure*}[t]
-\begin{minipage}{0.5\linewidth}
+\begin{minipage}{0.25\linewidth}
     \centering
-    \input{result/chess/g_chess_total}
-    \caption{Runtime vs Minimum Support(\%) for Chess ~\cite{dataset} Dataset }
+    \includegraphics[width=\textwidth]{images/result/g_chess_total}
+    \caption{Chess Dataset }
     \label{result:g_chess_total}
 \end{minipage}%
-\begin{minipage}{0.5\linewidth}
+\begin{minipage}{0.25\linewidth}
    \centering
-   \input{result/kosarak/g_k_total}
-   \caption{Runtime vs Minimum Support(\%) for Kosarak ~\cite{dataset} Dataset }
+   \includegraphics[width=\textwidth]{images/result/g_k_total}
+   \caption{Kosarak Dataset }
    \label{result:g_k_total}
     \end{minipage}
-\end{figure*} 	
-
-\begin{figure*}[t]
-\begin{minipage}{0.5\linewidth}
+\begin{minipage}{0.25\linewidth}
     \centering
-    \input{result/t10/g_t10_memory_node}
-    \caption{Total Memory vs Total Transaction (in thousand) for T40I10D100K ~\cite{dataset} Dataset }
+    \includegraphics[width=\textwidth]{images/result/g_t10_memory_node}
+    \caption{T40I10D100K Dataset }
     \label{result:g_t10_memory_node}
 \end{minipage}%
-\begin{minipage}{0.5\linewidth}
+\begin{minipage}{0.25\linewidth}
    \centering
-   \input{result/kosarak/g_k_memory_node}
-   \caption{Total Memory vs Total Transaction (in thousand) for Kosarak ~\cite{dataset} Dataset }
+   \includegraphics[width=\textwidth]{images/result/g_k_memory_node}
+   \caption{Kosarak Dataset }
    \label{result:g_k_memory_node}
     \end{minipage}
 \end{figure*}
