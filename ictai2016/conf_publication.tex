@@ -212,35 +212,6 @@ Figure-\ref{figure:US_TREE_HEADER_TABLE} shows \emph{US-Tree} for mining and cor
 We construct conditional trees from items having lowest total \emph{U\textsuperscript{cap}} value greater than \emph{minimum support}. As \emph{b} having total \emph{U\textsuperscript{cap}}, that is, $.69$, \emph{b} is skipped. Then the next candidate is \emph{d}. From header table pointer, we find that there is only one path for item \emph{d} exists in the mining tree (shown in Figure-\ref{figure:E_COND_TREE_HEADER_TABLE}), that is, \{\emph{a, c, d}\}:$1.08$. So we create conditional tree and update all nodes for mining probability with \emph{d's} \emph{U\textsuperscript{cap}} $1.08$. For this conditional tree, (Figure-\ref{figure:E_COND_TREE_HEADER_TABLE}) the header tables says all the nodes in the tree are having \emph{U\textsuperscript{cap}} greater than \emph{minimum support}, that is, $.9$. So, all the items are ready to be constructed as conditional tree. Since only one branch is found, we do not further construct conditional tree and take all the combinations as frequent items (Figure-\ref{figure:E_COND_TREE_HEADER_TABLE}. So we find \emph{\{dc\}, \{da\}, \{dca\}} as frequent pattern. 
 
 Next we create conditional tree for \emph{c}. Here $c$ exists in the tree for three paths those are \emph{\{a, c\} : $0.72$ , \{a , b, c\} : $.027$ and \{b, c\} : $0.27$}. So we create conditional tree (Figure-\ref{figure:E_COND_TREE_HEADER_TABLE}). Total mining value of \emph{c} is the sum of item caps in each respective path of \emph{c}. From the header, we see that \emph{b} has total cap having less than \emph{minimum support}, so we remove \emph{b} and create two length item set \emph{\{ca\}}. Next, we construct \emph{ca} conditional tree that contains only root (\emph{\{\}}). So no further tree is needed to be constructed and mined. Than we create conditional tree for \emph{a}. We find only root \emph{\{\}} as prefix. This way, we get all the frequent patterns, i.e. \emph{\{a\}, \{b\}, \{c\} \{d\}, \{dc\}, \{da\}, \{dca\} and \{ca\}}. As we have found all patterns from the upper bound, it is guaranteed that there will be no false negatives. However, some false positives may exist in the found frequent item set as there may be some value less than maximum value we assumed. Then we go for false positive elimination.
-
-\begin{figure*}[t]
-    \begin{minipage}{0.25\linewidth}
-        \centering
-  		\includegraphics[width=\textwidth]{images/result/g_t10_const_batch}
-  		\caption{T40I10D100K Dataset }
-  		\label{result:g_t10_const_batch}
-    \end{minipage}%	
-    \begin{minipage}{0.25\linewidth}
-         \centering
-  		 \includegraphics[width=\textwidth]{images/result/g_t10_const_win}
-  		 \caption{ T40I10D100K Dataset }
-  		 \label{result:g_t10_const_win}
-    \end{minipage}	
-	\begin{minipage}{0.25\linewidth}
-		\centering
-		\includegraphics[width=\textwidth]{images/result/g_m_total}
-		\caption{ Mushroom Dataset }
-		\label{result:g_m_total}
-	\end{minipage}%
-    \begin{minipage}{0.25\linewidth}
-		\centering
-		\includegraphics[width=\textwidth]{images/result/g_t10_total}
-		\caption{ T40I10D100K Dataset }
-		\label{result:g_t10_total}
-    \end{minipage}	
-\end{figure*}
-
-
 \subsubsection{False positive reduction}
     To recall, false positives are such patterns those exist in the frequent pattern list but not actually frequent. False negatives are such patterns those do not exist in the frequent pattern list but actually frequent. In our approach, the process of \emph{U\textsuperscript{cap}} assignment, construction of \emph{US-tree} and \emph{USFP-growth} mining, all are based on taking upper value of two item set supports, this may generate some false positives but no false negatives. In this section, we will discuss about finding and eliminating all the false positives from generated patterns by \emph{USFP-growth} mining. For this elimination process, we just use two scans of transactions. In the first scan we eliminate the infrequent one item set and in the second scan, we update \emph{frequent tree} exact support that finds infrequent items if exists in our frequent found items. The process is given below. 
 
@@ -252,29 +223,61 @@ Next, in the first scan of inserted transactions, we remove all one length infre
 
 %    \input{example/frequent_items}
 \begin{figure*}[t]
-\begin{minipage}{0.25\linewidth}
-    \centering
-    \includegraphics[width=\textwidth]{images/result/g_chess_total}
-    \caption{Chess Dataset }
-    \label{result:g_chess_total}
-\end{minipage}%
-\begin{minipage}{0.25\linewidth}
-   \centering
-   \includegraphics[width=\textwidth]{images/result/g_k_total}
-   \caption{Kosarak Dataset }
-   \label{result:g_k_total}
+%    \begin{minipage}{0.25\linewidth}
+%        \centering
+%  		\includegraphics[width=\textwidth]{images/result/g_t10_const_batch}
+%  		\caption{T40I10D100K Dataset }
+%  		\label{result:g_t10_const_batch}
+%    \end{minipage}%	
+%    \begin{minipage}{0.25\linewidth}
+%         \centering
+%  		 \includegraphics[width=\textwidth]{images/result/g_t10_const_win}
+%  		 \caption{ T40I10D100K Dataset }
+%  		 \label{result:g_t10_const_win}
+%    \end{minipage}	
+	\begin{minipage}{0.32\linewidth}
+		\centering
+		\includegraphics[width=\textwidth]{images/result/g_m_total}
+		\caption{ Mushroom Dataset }
+		\label{result:g_m_total}
+	\end{minipage}%
+    \begin{minipage}{0.32\linewidth}
+		\centering
+		\includegraphics[width=\textwidth]{images/result/g_t10_total}
+		\caption{ T40I10D100K Dataset }
+		\label{result:g_t10_total}
     \end{minipage}
-\begin{minipage}{0.25\linewidth}
-    \centering
-    \includegraphics[width=\textwidth]{images/result/g_t10_memory_node}
-    \caption{T40I10D100K Dataset }
-    \label{result:g_t10_memory_node}
-\end{minipage}%
-\begin{minipage}{0.25\linewidth}
-   \centering
-   \includegraphics[width=\textwidth]{images/result/g_k_memory_node}
-   \caption{Kosarak Dataset }
-   \label{result:g_k_memory_node}
+	\begin{minipage}{0.32\linewidth}
+		\centering
+		\includegraphics[width=\textwidth]{images/result/g_chess_total}
+		\caption{Chess Dataset }
+		\label{result:g_chess_total}
+	\end{minipage}%	
+\end{figure*}
+\begin{figure*}[t]
+%	\begin{minipage}{0.32\linewidth}
+%		\centering
+%		\includegraphics[width=\textwidth]{images/result/g_chess_total}
+%		\caption{Chess Dataset }
+%		\label{result:g_chess_total}
+%	\end{minipage}%
+	\begin{minipage}{0.32\linewidth}
+	   \centering
+	   \includegraphics[width=\textwidth]{images/result/g_k_total}
+	   \caption{Kosarak Dataset }
+	   \label{result:g_k_total}
+		\end{minipage}
+	\begin{minipage}{0.32\linewidth}
+		\centering
+		\includegraphics[width=\textwidth]{images/result/g_t10_memory_node}
+		\caption{T40I10D100K Dataset }
+		\label{result:g_t10_memory_node}
+	\end{minipage}%
+	\begin{minipage}{0.32\linewidth}
+	   \centering
+	   \includegraphics[width=\textwidth]{images/result/g_k_memory_node}
+	   \caption{Kosarak Dataset }
+	   \label{result:g_k_memory_node}
     \end{minipage}
 \end{figure*}
 
